@@ -69,7 +69,13 @@ export const categories = Array.from(new Set(products.map((p) => p.category)));
 
 export const getProduct = (id: string) => products.find((p) => p.id === id);
 
-export const formatPrice = (value: number) => `GH₵${value.toLocaleString("en-US")}`;
+// Conversion rate from EUR base price to Ghanaian Cedis (GHS)
+export const EUR_TO_GHS_RATE = 17.5;
+
+export const formatPrice = (value: number) => {
+  const amountInCedis = Math.round(value * EUR_TO_GHS_RATE);
+  return `GH₵${amountInCedis.toLocaleString("en-US")}`;
+};
 
 export const lookbook = [
   { src: look1, alt: "Model in layered oatmeal knitwear on a Nordic coastline" },
