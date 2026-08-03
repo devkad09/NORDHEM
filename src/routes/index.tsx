@@ -73,6 +73,18 @@ function Home() {
           </div>
         </div>
 
+        {/* Floating Ambient Badges on Hero */}
+        <div className="hidden lg:flex absolute bottom-12 right-12 z-10 gap-3">
+          <div className="rounded border border-background/20 bg-background/80 px-4 py-2.5 backdrop-blur-md text-xs shadow-lg animate-fade-up animation-delay-300">
+            <p className="eyebrow text-[0.6rem] text-muted-foreground">Natural Materials</p>
+            <p className="font-medium text-foreground">100% Undyed Gotland Wool</p>
+          </div>
+          <div className="rounded border border-background/20 bg-background/80 px-4 py-2.5 backdrop-blur-md text-xs shadow-lg animate-fade-up animation-delay-400">
+            <p className="eyebrow text-[0.6rem] text-muted-foreground">Artisan Heritage</p>
+            <p className="font-medium text-foreground">Hand-Linked in Porto & Hawick</p>
+          </div>
+        </div>
+
         {/* Floating Scroll Indicator */}
         <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center opacity-70 hover:opacity-100 transition-opacity">
           <span className="eyebrow text-[10px] tracking-[0.25em] mb-1">Scroll</span>
@@ -80,8 +92,28 @@ function Home() {
         </div>
       </section>
 
+      {/* Infinite Marquee Ticker */}
+      <section className="border-y border-border bg-card/60 py-3.5 overflow-hidden select-none">
+        <div className="animate-marquee whitespace-nowrap text-xs uppercase tracking-[0.25em] text-foreground/80 font-medium">
+          {[...Array(4)].map((_, i) => (
+            <span key={i} className="inline-flex items-center gap-8 mx-4">
+              <span>✦ Natural Undyed Fibres</span>
+              <span>•</span>
+              <span>Gotland Wool & Italian Merino</span>
+              <span>•</span>
+              <span>Small Batch Copenhagen Design</span>
+              <span>•</span>
+              <span>Free Worldwide Express Shipping</span>
+              <span>•</span>
+              <span>Lifetime Garment Repair Pledge</span>
+              <span>•</span>
+            </span>
+          ))}
+        </div>
+      </section>
+
       {/* Mission Statement with Fade Up Animation */}
-      <section className="mx-auto max-w-3xl px-5 py-24 text-center md:py-32">
+      <section className="mx-auto max-w-3xl px-5 py-20 text-center md:py-28">
         <p className="eyebrow animate-fade-up">Our mission</p>
         <p className="animate-fade-up animation-delay-100 mt-6 font-display text-2xl leading-relaxed md:text-3.5xl text-foreground">
           We make a small number of pieces very well, and then we make them again. Nordhem exists
@@ -91,6 +123,35 @@ function Home() {
           <Link to="/about" className="eyebrow link-underline inline-block text-foreground">
             Read our story
           </Link>
+        </div>
+      </section>
+
+      {/* Category Quick-Nav Grid */}
+      <section className="mx-auto max-w-[110rem] px-5 md:px-10 pb-16">
+        <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+          {[
+            { name: "Outerwear", count: "4 Pieces", image: products[0].imageUrl },
+            { name: "Knitwear", count: "3 Pieces", image: products[2].imageUrl },
+            { name: "Tops", count: "3 Pieces", image: products[5].imageUrl },
+            { name: "Trousers", count: "2 Pieces", image: products[8].imageUrl },
+          ].map((cat) => (
+            <Link
+              key={cat.name}
+              to="/shop"
+              className="group relative overflow-hidden bg-secondary aspect-[4/5] block border border-border/50"
+            >
+              <img
+                src={cat.image}
+                alt={cat.name}
+                loading="lazy"
+                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent p-5 flex flex-col justify-end">
+                <p className="eyebrow text-[0.65rem] text-muted-foreground">{cat.count}</p>
+                <h3 className="font-display text-2xl text-foreground group-hover:translate-x-1 transition-transform">{cat.name}</h3>
+              </div>
+            </Link>
+          ))}
         </div>
       </section>
 
