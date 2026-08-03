@@ -69,9 +69,7 @@ export const categories = Array.from(new Set(products.map((p) => p.category)));
 
 export const getProduct = (id: string) => products.find((p) => p.id === id);
 
-export const formatPrice = (value: number) =>
-  new Intl.NumberFormat("en-US", { style: "currency", currency: "EUR", maximumFractionDigits: 0 })
-    .format(value);
+export const formatPrice = (value: number) => `GH₵${value.toLocaleString("en-US")}`;
 
 export const lookbook = [
   { src: look1, alt: "Model in layered oatmeal knitwear on a Nordic coastline" },
