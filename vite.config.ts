@@ -5,6 +5,9 @@ import tsconfigPaths from "vite-tsconfig-paths";
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 
 export default defineConfig({
+  nitro: {
+    preset: "vercel",
+  },
   plugins: [
     tanstackStart({
       server: { entry: "server" },
