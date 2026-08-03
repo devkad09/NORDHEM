@@ -14,7 +14,7 @@ const links = [
 ] as const;
 
 export function Nav() {
-  const { count } = useCart();
+  const { count, toggleCart } = useCart();
   const { count: wishlistCount } = useWishlist();
   const { currency, setCurrencyCode } = useCurrency();
   const [open, setOpen] = useState(false);
@@ -77,14 +77,14 @@ export function Nav() {
             <span className="text-xs tabular-nums">{wishlistCount}</span>
           </Link>
 
-          <Link
-            to="/cart"
-            className="flex items-center gap-1.5 p-1 transition-opacity hover:opacity-60"
+          <button
+            onClick={toggleCart}
+            className="flex items-center gap-1.5 p-1 transition-opacity hover:opacity-60 cursor-pointer"
             aria-label={`Cart, ${count} items`}
           >
             <ShoppingBag size={18} strokeWidth={1.25} />
             <span className="text-xs tabular-nums">{count}</span>
-          </Link>
+          </button>
         </div>
       </div>
 

@@ -18,6 +18,7 @@ import { RecentlyViewedProvider } from "@/lib/recently-viewed";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { PageLoadingSkeleton } from "@/components/Skeletons";
+import { MiniCartDrawer } from "@/components/MiniCartDrawer";
 import { Toaster } from "sonner";
 
 function NotFoundComponent() {
@@ -144,6 +145,7 @@ function RootComponent() {
                 </main>
                 <Footer />
               </div>
+              <MiniCartDrawer />
               <Toaster position="bottom-right" toastOptions={{ className: "font-sans text-xs bg-card text-foreground border-border" }} />
             </CartProvider>
           </RecentlyViewedProvider>

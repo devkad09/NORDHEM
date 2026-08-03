@@ -8,6 +8,10 @@ type CartContextValue = {
   count: number;
   subtotal: number;
   detailed: (CartLine & { product: Product })[];
+  isOpen: boolean;
+  openCart: () => void;
+  closeCart: () => void;
+  toggleCart: () => void;
   add: (id: string, size: string, qty?: number) => void;
   remove: (id: string, size: string) => void;
   setQty: (id: string, size: string, qty: number) => void;
@@ -19,6 +23,7 @@ const STORAGE_KEY = "nordhem.cart";
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [lines, setLines] = useState<CartLine[]>([]);
+  const [isOpen, setIsOpen] = useState(false);
   const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
@@ -47,9 +52,13 @@ export function CartProvider({ children }: { children: ReactNode }) {
     return {
       lines,
       detailed,
+      isOpen,
+      openCart: () => setIsOpen(true),
+      closeCart: () => setIsOpen(false),
+      toggleCart: () => setIsOpen((prev) => !prev),
       count: lines.reduce((n, l) => n + l.qty, 0),
       subtotal: detailed.reduce((n, l) => n + l.product.price * l.qty, 0),
-      add: (id, size, qty = 1) =>
+      add: (id, size, qty = 1) => {
         setLines((prev) => {
           const existing = prev.find((l) => l.id === id && l.size === size);
           if (existing) {
@@ -58,7 +67,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
             );
           }
           return [...prev, { id, size, qty }];
-        }),
+        });
+        setIsOpen(true);
+      },
       remove: (id, size) =>
         setLines((prev) => prev.filter((l) => !(l.id === id && l.size === size))),
       setQty: (id, size, qty) =>
@@ -69,7 +80,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         ),
       clear: () => setLines([]),
     };
-  }, [lines]);
+  }, [lines, isOpen]);
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }

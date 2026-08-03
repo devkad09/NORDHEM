@@ -1,8 +1,11 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState, useRef, useEffect } from "react";
-import { Heart, AlertCircle, Ruler, X, Check } from "lucide-react";
+import { Heart, AlertCircle, Ruler, X, Check, Share2, Calculator } from "lucide-react";
 import { getProduct, products } from "@/data/products";
 import { ProductCard } from "@/components/ProductCard";
+import { ProductReviews } from "@/components/ProductReviews";
+import { SizeCalculatorModal } from "@/components/SizeCalculatorModal";
+import { ShareModal } from "@/components/ShareModal";
 import { useCart } from "@/lib/cart";
 import { useWishlist } from "@/lib/wishlist";
 import { useCurrency } from "@/lib/currency";
@@ -52,6 +55,8 @@ function ProductDetail() {
   const [sizeError, setSizeError] = useState<string | null>(null);
   const [added, setAdded] = useState(false);
   const [showSizeGuide, setShowSizeGuide] = useState(false);
+  const [showSizeCalculator, setShowSizeCalculator] = useState(false);
+  const [showShareModal, setShowShareModal] = useState(false);
 
   const sizeSectionRef = useRef<HTMLDivElement>(null);
 
@@ -146,13 +151,22 @@ function ProductDetail() {
                 )}
               </div>
 
-              <button
-                type="button"
-                onClick={() => setShowSizeGuide(true)}
-                className="inline-flex items-center gap-1.5 text-xs text-muted-foreground underline underline-offset-4 hover:text-foreground transition-colors"
-              >
-                <Ruler size={13} /> Size Guide
-              </button>
+              <div className="flex items-center gap-3">
+                <button
+                  type="button"
+                  onClick={() => setShowSizeCalculator(true)}
+                  className="inline-flex items-center gap-1 text-xs text-muted-foreground underline underline-offset-4 hover:text-foreground transition-colors"
+                >
+                  <Calculator size={13} /> Find My Size
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setShowSizeGuide(true)}
+                  className="inline-flex items-center gap-1 text-xs text-muted-foreground underline underline-offset-4 hover:text-foreground transition-colors"
+                >
+                  <Ruler size={13} /> Size Guide
+                </button>
+              </div>
             </div>
 
             <div className="mt-3 flex flex-wrap gap-2">
@@ -220,6 +234,13 @@ function ProductDetail() {
               <span className="hidden sm:inline text-xs">
                 {wishlisted ? "Saved" : "Save"}
               </span>
+            </button>
+            <button
+              onClick={() => setShowShareModal(true)}
+              aria-label="Share piece"
+              className="btn-outline px-3"
+            >
+              <Share2 size={16} />
             </button>
           </div>
 
@@ -305,6 +326,22 @@ function ProductDetail() {
         </div>
       )}
 
+      {/* Size Calculator Modal */}
+      {showSizeCalculator && (
+        <SizeCalculatorModal
+          onSelectSize={(selected) => {
+            setSize(selected);
+            setSizeError(null);
+          }}
+          onClose={() => setShowSizeCalculator(false)}
+        />
+      )}
+
+      {/* Share Piece Modal */}
+      {showShareModal && (
+        <ShareModal product={product} onClose={() => setShowShareModal(false)} />
+      )}
+
       <section className="mt-28">
         <h2 className="border-b border-border pb-5 font-display text-2xl">You may also like</h2>
         <div className="mt-10 grid grid-cols-2 gap-x-5 gap-y-12 md:grid-cols-4 md:gap-x-8">
@@ -313,6 +350,9 @@ function ProductDetail() {
           ))}
         </div>
       </section>
+
+      {/* Reviews & Customer Experiences */}
+      <ProductReviews productId={product.id} />
 
       {viewedProducts.filter((p) => p.id !== product.id).length > 0 && (
         <section className="mt-24 border-t border-border pt-16">
