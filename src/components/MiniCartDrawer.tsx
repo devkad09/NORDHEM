@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { X, ShoppingBag, ArrowRight, Trash2 } from "lucide-react";
 import { useCart } from "@/lib/cart";
 import { useCurrency } from "@/lib/currency";
+import { FreeShippingBar } from "./FreeShippingBar";
 
 export function MiniCartDrawer() {
   const { detailed, count, subtotal, isOpen, closeCart, setQty, remove } = useCart();
@@ -117,6 +118,8 @@ export function MiniCartDrawer() {
         {/* Footer Summary */}
         {detailed.length > 0 && (
           <div className="border-t border-border p-5 space-y-4 md:p-6 bg-card/90">
+            <FreeShippingBar subtotalEur={subtotal} />
+
             <div className="flex justify-between text-sm">
               <span className="eyebrow">Subtotal</span>
               <span className="font-medium tabular-nums">{formatPrice(subtotal)}</span>

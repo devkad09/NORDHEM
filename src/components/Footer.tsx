@@ -27,6 +27,7 @@ export function Footer() {
           <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
             <li><Link to="/about" className="link-underline">About</Link></li>
             <li><Link to="/contact" className="link-underline">Contact</Link></li>
+            <li><Link to="/track-order" className="link-underline text-foreground/90 font-medium">Track Order</Link></li>
           </ul>
           <div className="mt-6 flex gap-4 text-muted-foreground">
             <a href="#" aria-label="Instagram" className="transition-colors hover:text-foreground">

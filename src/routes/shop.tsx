@@ -23,12 +23,13 @@ export const Route = createFileRoute("/shop")({
   component: Shop,
 });
 
-type Sort = "featured" | "price-asc" | "price-desc";
+type Sort = "featured" | "price-asc" | "price-desc" | "name-asc";
 
 function Shop() {
   const [category, setCategory] = useState<string>("All");
   const [sort, setSort] = useState<Sort>("featured");
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const [inStockOnly, setInStockOnly] = useState<boolean>(false);
 
   const visible = useMemo(() => {
     const query = searchQuery.trim().toLowerCase();
@@ -39,12 +40,15 @@ function Shop() {
         p.name.toLowerCase().includes(query) ||
         p.category.toLowerCase().includes(query) ||
         p.description.toLowerCase().includes(query);
-      return matchesCategory && matchesSearch;
+      const matchesInStock = !inStockOnly || (p.outOfStockSizes?.length ?? 0) < p.sizes.length;
+      return matchesCategory && matchesSearch && matchesInStock;
     });
+
     if (sort === "price-asc") return [...list].sort((a, b) => a.price - b.price);
     if (sort === "price-desc") return [...list].sort((a, b) => b.price - a.price);
+    if (sort === "name-asc") return [...list].sort((a, b) => a.name.localeCompare(b.name));
     return list;
-  }, [category, sort, searchQuery]);
+  }, [category, sort, searchQuery, inStockOnly]);
 
   return (
     <div className="mx-auto max-w-[110rem] px-5 py-14 md:px-10 md:py-20">
@@ -81,8 +85,8 @@ function Shop() {
             <button
               key={c}
               onClick={() => setCategory(c)}
-              className={`eyebrow transition-colors ${
-                category === c ? "text-foreground" : "hover:text-foreground"
+              className={`eyebrow transition-colors cursor-pointer ${
+                category === c ? "text-foreground font-semibold" : "hover:text-foreground"
               }`}
             >
               {c}
@@ -90,18 +94,31 @@ function Shop() {
           ))}
         </div>
 
-        <label className="flex items-center gap-3 text-xs">
-          <span className="eyebrow">Sort</span>
-          <select
-            value={sort}
-            onChange={(e) => setSort(e.target.value as Sort)}
-            className="border-b border-border bg-transparent py-1 text-xs focus:border-clay focus:outline-none"
-          >
-            <option value="featured">Featured</option>
-            <option value="price-asc">Price: low to high</option>
-            <option value="price-desc">Price: high to low</option>
-          </select>
-        </label>
+        <div className="flex flex-wrap items-center gap-6">
+          <label className="flex items-center gap-2 text-xs text-muted-foreground hover:text-foreground cursor-pointer select-none">
+            <input
+              type="checkbox"
+              checked={inStockOnly}
+              onChange={(e) => setInStockOnly(e.target.checked)}
+              className="accent-foreground rounded"
+            />
+            <span>In stock only</span>
+          </label>
+
+          <label className="flex items-center gap-3 text-xs">
+            <span className="eyebrow">Sort</span>
+            <select
+              value={sort}
+              onChange={(e) => setSort(e.target.value as Sort)}
+              className="border-b border-border bg-transparent py-1 text-xs focus:border-foreground focus:outline-none cursor-pointer"
+            >
+              <option value="featured" className="bg-card">Featured</option>
+              <option value="price-asc" className="bg-card">Price: low to high</option>
+              <option value="price-desc" className="bg-card">Price: high to low</option>
+              <option value="name-asc" className="bg-card">Name: A-Z</option>
+            </select>
+          </label>
+        </div>
       </div>
 
       <div className="mt-5 flex items-center justify-between">
