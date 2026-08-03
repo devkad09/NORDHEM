@@ -144,5 +144,29 @@
     "description": "A quiet flannel trouser with a pressed crease and a clean taper to the ankle. Weight enough for winter.",
     "details": ["100% wool flannel", "Pressed crease, hook closure", "Woven in Italy"],
     "featured": false
+  },
+  {
+    "id": "visby-wool-scarf",
+    "name": "Visby Raw-Edge Wool Scarf",
+    "price": 130,
+    "category": "Accessories",
+    "image": "wool-scarf",
+    "hoverImage": "look-5",
+    "sizes": ["ONE SIZE"],
+    "description": "An oversized raw-edge fringed scarf woven from thick oatmeal Gotland wool. Unbrushed natural texture that softens with wear.",
+    "details": ["100% raw Gotland wool", "Fringed edges, 210cm x 50cm", "Woven in Gotland, Sweden"],
+    "featured": true
+  },
+  {
+    "id": "faro-cashmere-crewneck",
+    "name": "Fårö Heavy Cashmere Crewneck",
+    "price": 340,
+    "category": "Knitwear",
+    "image": "cashmere-crewneck",
+    "hoverImage": "look-1",
+    "sizes": ["XS", "S", "M", "L", "XL"],
+    "description": "A heavy 4-ply charcoal Mongolian cashmere sweater with chunky 2x2 ribbed collar and cuffs. Exceptionally soft and warm.",
+    "details": ["100% 4-ply Mongolian Cashmere", "Seamless 3D knit construction", "Dry clean or hand wash cold"],
+    "featured": true
   }
 ]

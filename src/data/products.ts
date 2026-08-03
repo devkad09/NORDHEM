@@ -12,6 +12,8 @@ import poplinShirt from "@/assets/products/poplin-shirt.jpg";
 import tee from "@/assets/products/tee.jpg";
 import wideTrouser from "@/assets/products/wide-trouser.jpg";
 import taperedTrouser from "@/assets/products/tapered-trouser.jpg";
+import woolScarf from "@/assets/products/wool-scarf.png";
+import cashmereCrewneck from "@/assets/products/cashmere-crewneck.png";
 import look1 from "@/assets/look-1.jpg";
 import look2 from "@/assets/look-2.jpg";
 import look3 from "@/assets/look-3.jpg";
@@ -32,6 +34,8 @@ export const imageMap: Record<string, string | undefined> = {
   tee,
   "wide-trouser": wideTrouser,
   "tapered-trouser": taperedTrouser,
+  "wool-scarf": woolScarf,
+  "cashmere-crewneck": cashmereCrewneck,
   "look-1": look1,
   "look-2": look2,
   "look-3": look3,
