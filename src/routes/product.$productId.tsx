@@ -1,10 +1,12 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Heart, AlertCircle, Ruler, X, Check } from "lucide-react";
-import { formatPrice, getProduct, products } from "@/data/products";
+import { getProduct, products } from "@/data/products";
 import { ProductCard } from "@/components/ProductCard";
 import { useCart } from "@/lib/cart";
 import { useWishlist } from "@/lib/wishlist";
+import { useCurrency } from "@/lib/currency";
+import { useRecentlyViewed } from "@/lib/recently-viewed";
 
 export const Route = createFileRoute("/product/$productId")({
   loader: ({ params }) => {
@@ -35,6 +37,13 @@ function ProductDetail() {
   const { product } = Route.useLoaderData();
   const { add } = useCart();
   const { isWishlisted, toggle } = useWishlist();
+  const { formatPrice } = useCurrency();
+  const { addViewed, viewedProducts } = useRecentlyViewed();
+
+  useEffect(() => {
+    if (product) addViewed(product.id);
+  }, [product, addViewed]);
+
   const wishlisted = isWishlisted(product.id);
 
   const gallery = [product.imageUrl, product.hoverImageUrl];
@@ -304,6 +313,21 @@ function ProductDetail() {
           ))}
         </div>
       </section>
+
+      {viewedProducts.filter((p) => p.id !== product.id).length > 0 && (
+        <section className="mt-24 border-t border-border pt-16">
+          <p className="eyebrow mb-2">History</p>
+          <h2 className="font-display text-2xl">Recently Viewed</h2>
+          <div className="mt-8 grid grid-cols-2 gap-x-5 gap-y-12 md:grid-cols-4 md:gap-x-8">
+            {viewedProducts
+              .filter((p) => p.id !== product.id)
+              .slice(0, 4)
+              .map((p) => (
+                <ProductCard key={p.id} product={p} />
+              ))}
+          </div>
+        </section>
+      )}
     </div>
   );
 }

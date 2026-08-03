@@ -1,10 +1,16 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { CheckCircle2, ArrowLeft, ShieldCheck, Truck, CreditCard } from "lucide-react";
-import { formatPrice } from "@/data/products";
+import { CheckCircle2, ArrowLeft, ShieldCheck, Truck, CreditCard, Tag, Check } from "lucide-react";
 import { useCart } from "@/lib/cart";
+import { useCurrency } from "@/lib/currency";
+import { z } from "zod";
+
+const searchSchema = z.object({
+  promo: z.string().optional(),
+});
 
 export const Route = createFileRoute("/checkout")({
+  validateSearch: (search) => searchSchema.parse(search),
   head: () => ({
     meta: [
       { title: "Checkout — Nordhem" },
@@ -39,8 +45,19 @@ type OrderDetails = {
   }>;
 };
 
+const PROMO_CODES: Record<string, { label: string; percent?: number; freeShipping?: boolean }> = {
+  NORDHEM10: { label: "10% OFF", percent: 10 },
+  WELCOME20: { label: "20% OFF", percent: 20 },
+  FREESHIP: { label: "Free Express Shipping", freeShipping: true },
+};
+
 function CheckoutPage() {
   const { detailed, subtotal, clear } = useCart();
+  const { formatPrice } = useCurrency();
+  const search = Route.useSearch();
+
+  const initialPromo = search.promo ? search.promo.toUpperCase() : null;
+  const [promoCode, setPromoCode] = useState<string | null>(initialPromo && PROMO_CODES[initialPromo] ? initialPromo : null);
 
   // Form State
   const [email, setEmail] = useState("");
@@ -56,8 +73,11 @@ function CheckoutPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [orderConfirmed, setOrderConfirmed] = useState<OrderDetails | null>(null);
 
-  const shippingCost = shippingMethod === "express" ? 25 : 0;
-  const total = subtotal + shippingCost;
+  const promoInfo = promoCode ? PROMO_CODES[promoCode] : null;
+  const discountAmount = promoInfo?.percent ? subtotal * (promoInfo.percent / 100) : 0;
+  const rawShippingCost = shippingMethod === "express" ? 25 : 0;
+  const shippingCost = promoInfo?.freeShipping ? 0 : rawShippingCost;
+  const total = Math.max(0, subtotal - discountAmount + shippingCost);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

@@ -13,9 +13,12 @@ import { type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { CartProvider } from "@/lib/cart";
 import { WishlistProvider } from "@/lib/wishlist";
+import { CurrencyProvider } from "@/lib/currency";
+import { RecentlyViewedProvider } from "@/lib/recently-viewed";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { PageLoadingSkeleton } from "@/components/Skeletons";
+import { Toaster } from "sonner";
 
 function NotFoundComponent() {
   return (
@@ -127,20 +130,25 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <WishlistProvider>
-        <CartProvider>
-          <div className="flex min-h-screen flex-col">
-            <Nav />
-            <main className="flex-1">
-              <div key={location.pathname} className="page-transition">
-                {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-                <Outlet />
+      <CurrencyProvider>
+        <WishlistProvider>
+          <RecentlyViewedProvider>
+            <CartProvider>
+              <div className="flex min-h-screen flex-col">
+                <Nav />
+                <main className="flex-1">
+                  <div key={location.pathname} className="page-transition">
+                    {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+                    <Outlet />
+                  </div>
+                </main>
+                <Footer />
               </div>
-            </main>
-            <Footer />
-          </div>
-        </CartProvider>
-      </WishlistProvider>
+              <Toaster position="bottom-right" toastOptions={{ className: "font-sans text-xs bg-card text-foreground border-border" }} />
+            </CartProvider>
+          </RecentlyViewedProvider>
+        </WishlistProvider>
+      </CurrencyProvider>
     </QueryClientProvider>
   );
 }

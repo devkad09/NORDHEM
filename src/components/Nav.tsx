@@ -1,8 +1,9 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { Heart, Menu, ShoppingBag, X } from "lucide-react";
+import { Heart, Menu, ShoppingBag, X, Globe } from "lucide-react";
 import { useCart } from "@/lib/cart";
 import { useWishlist } from "@/lib/wishlist";
+import { useCurrency, type CurrencyCode, CURRENCIES } from "@/lib/currency";
 
 const links = [
   { to: "/shop", label: "Shop" },
@@ -15,6 +16,7 @@ const links = [
 export function Nav() {
   const { count } = useCart();
   const { count: wishlistCount } = useWishlist();
+  const { currency, setCurrencyCode } = useCurrency();
   const [open, setOpen] = useState(false);
 
   return (
@@ -48,7 +50,24 @@ export function Nav() {
           NORDHEM
         </Link>
 
-        <div className="flex flex-1 items-center justify-end gap-5">
+        <div className="flex flex-1 items-center justify-end gap-4 md:gap-6">
+          {/* Currency Switcher */}
+          <div className="flex items-center gap-1.5 border-r border-border pr-3 md:pr-4">
+            <Globe size={14} className="text-muted-foreground hidden sm:block" />
+            <select
+              value={currency.code}
+              onChange={(e) => setCurrencyCode(e.target.value as CurrencyCode)}
+              aria-label="Select currency"
+              className="border-b border-transparent bg-transparent py-0.5 text-xs text-foreground/80 transition-colors hover:border-foreground focus:border-foreground focus:outline-none cursor-pointer"
+            >
+              {Object.values(CURRENCIES).map((c) => (
+                <option key={c.code} value={c.code} className="bg-card text-foreground">
+                  {c.symbol} {c.code}
+                </option>
+              ))}
+            </select>
+          </div>
+
           <Link
             to="/wishlist"
             className="flex items-center gap-1.5 p-1 transition-opacity hover:opacity-60"
