@@ -15,10 +15,12 @@ import { CartProvider } from "@/lib/cart";
 import { WishlistProvider } from "@/lib/wishlist";
 import { CurrencyProvider } from "@/lib/currency";
 import { RecentlyViewedProvider } from "@/lib/recently-viewed";
+import { CompareProvider } from "@/lib/compare";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { PageLoadingSkeleton } from "@/components/Skeletons";
 import { MiniCartDrawer } from "@/components/MiniCartDrawer";
+import { CompareDrawer } from "@/components/CompareDrawer";
 import { Toaster } from "sonner";
 
 function NotFoundComponent() {
@@ -134,20 +136,23 @@ function RootComponent() {
       <CurrencyProvider>
         <WishlistProvider>
           <RecentlyViewedProvider>
-            <CartProvider>
-              <div className="flex min-h-screen flex-col">
-                <Nav />
-                <main className="flex-1">
-                  <div key={location.pathname} className="page-transition">
-                    {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-                    <Outlet />
-                  </div>
-                </main>
-                <Footer />
-              </div>
-              <MiniCartDrawer />
-              <Toaster position="bottom-right" toastOptions={{ className: "font-sans text-xs bg-card text-foreground border-border" }} />
-            </CartProvider>
+            <CompareProvider>
+              <CartProvider>
+                <div className="flex min-h-screen flex-col">
+                  <Nav />
+                  <main className="flex-1">
+                    <div key={location.pathname} className="page-transition">
+                      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+                      <Outlet />
+                    </div>
+                  </main>
+                  <Footer />
+                </div>
+                <MiniCartDrawer />
+                <CompareDrawer />
+                <Toaster position="bottom-right" toastOptions={{ className: "font-sans text-xs bg-card text-foreground border-border" }} />
+              </CartProvider>
+            </CompareProvider>
           </RecentlyViewedProvider>
         </WishlistProvider>
       </CurrencyProvider>

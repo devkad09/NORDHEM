@@ -1,15 +1,19 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { Heart } from "lucide-react";
+import { Heart, SlidersHorizontal } from "lucide-react";
 import { type Product } from "@/data/products";
 import { useWishlist } from "@/lib/wishlist";
 import { useCurrency } from "@/lib/currency";
+import { useCompare } from "@/lib/compare";
 import { QuickViewModal } from "./QuickViewModal";
 
 export function ProductCard({ product }: { product: Product }) {
   const { isWishlisted, toggle } = useWishlist();
   const { formatPrice } = useCurrency();
+  const { isComparing, toggleCompare } = useCompare();
+
   const wishlisted = isWishlisted(product.id);
+  const comparing = isComparing(product.id);
   const [showQuickView, setShowQuickView] = useState(false);
 
   return (
@@ -51,22 +55,39 @@ export function ProductCard({ product }: { product: Product }) {
           </button>
         </div>
 
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            toggle(product.id);
-          }}
-          aria-label={wishlisted ? "Remove from wishlist" : "Add to wishlist"}
-          className="absolute top-3 right-3 z-10 rounded-full bg-background/80 p-2 backdrop-blur-sm transition-all hover:bg-background hover:scale-110"
-        >
-          <Heart
-            size={16}
-            className={`transition-colors ${
-              wishlisted ? "fill-foreground text-foreground" : "text-foreground/70"
+        {/* Wishlist & Compare Action Overlay */}
+        <div className="absolute top-3 right-3 z-10 flex flex-col gap-1.5">
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              toggle(product.id);
+            }}
+            aria-label={wishlisted ? "Remove from wishlist" : "Add to wishlist"}
+            className="rounded-full bg-background/80 p-2 backdrop-blur-sm transition-all hover:bg-background hover:scale-110"
+          >
+            <Heart
+              size={15}
+              className={`transition-colors ${
+                wishlisted ? "fill-foreground text-foreground" : "text-foreground/70"
+              }`}
+            />
+          </button>
+
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              toggleCompare(product.id);
+            }}
+            aria-label={comparing ? "Remove from comparison" : "Compare piece"}
+            className={`rounded-full p-2 backdrop-blur-sm transition-all hover:scale-110 ${
+              comparing ? "bg-foreground text-background" : "bg-background/80 text-foreground/70 hover:bg-background hover:text-foreground"
             }`}
-          />
-        </button>
+          >
+            <SlidersHorizontal size={14} />
+          </button>
+        </div>
 
         <Link
           to="/product/$productId"

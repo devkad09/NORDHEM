@@ -4,6 +4,7 @@ import heroImage from "@/assets/hero.jpg";
 import { products, lookbook } from "@/data/products";
 import { ProductCard } from "@/components/ProductCard";
 import { Newsletter } from "@/components/Newsletter";
+import { VipBanner } from "@/components/VipBanner";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -112,6 +113,11 @@ function Home() {
             </div>
           ))}
         </div>
+      </section>
+
+      {/* VIP Circle Banner */}
+      <section className="mx-auto mt-24 max-w-[110rem] px-5 md:px-10">
+        <VipBanner />
       </section>
 
       {/* Lookbook Section with Image Scale Effects */}
