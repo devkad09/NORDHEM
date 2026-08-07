@@ -17,8 +17,12 @@ import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as GiftCardsRouteImport } from './routes/gift-cards'
 import { Route as LookbookRouteImport } from './routes/lookbook'
+import { Route as RewardsRouteImport } from './routes/rewards'
 import { Route as ShopRouteImport } from './routes/shop'
+import { Route as StyleQuizRouteImport } from './routes/style-quiz'
+import { Route as SustainabilityRouteImport } from './routes/sustainability'
 import { Route as TrackOrderRouteImport } from './routes/track-order'
+import { Route as WardrobeStudioRouteImport } from './routes/wardrobe-studio'
 import { Route as WishlistRouteImport } from './routes/wishlist'
 import { Route as ProductProductIdRouteImport } from './routes/product.$productId'
 
@@ -62,14 +66,34 @@ const LookbookRoute = LookbookRouteImport.update({
   path: '/lookbook',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RewardsRoute = RewardsRouteImport.update({
+  id: '/rewards',
+  path: '/rewards',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ShopRoute = ShopRouteImport.update({
   id: '/shop',
   path: '/shop',
   getParentRoute: () => rootRouteImport,
 } as any)
+const StyleQuizRoute = StyleQuizRouteImport.update({
+  id: '/style-quiz',
+  path: '/style-quiz',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SustainabilityRoute = SustainabilityRouteImport.update({
+  id: '/sustainability',
+  path: '/sustainability',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TrackOrderRoute = TrackOrderRouteImport.update({
   id: '/track-order',
   path: '/track-order',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WardrobeStudioRoute = WardrobeStudioRouteImport.update({
+  id: '/wardrobe-studio',
+  path: '/wardrobe-studio',
   getParentRoute: () => rootRouteImport,
 } as any)
 const WishlistRoute = WishlistRouteImport.update({
@@ -92,8 +116,12 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/gift-cards': typeof GiftCardsRoute
   '/lookbook': typeof LookbookRoute
+  '/rewards': typeof RewardsRoute
   '/shop': typeof ShopRoute
+  '/style-quiz': typeof StyleQuizRoute
+  '/sustainability': typeof SustainabilityRoute
   '/track-order': typeof TrackOrderRoute
+  '/wardrobe-studio': typeof WardrobeStudioRoute
   '/wishlist': typeof WishlistRoute
   '/product/$productId': typeof ProductProductIdRoute
 }
@@ -106,8 +134,12 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/gift-cards': typeof GiftCardsRoute
   '/lookbook': typeof LookbookRoute
+  '/rewards': typeof RewardsRoute
   '/shop': typeof ShopRoute
+  '/style-quiz': typeof StyleQuizRoute
+  '/sustainability': typeof SustainabilityRoute
   '/track-order': typeof TrackOrderRoute
+  '/wardrobe-studio': typeof WardrobeStudioRoute
   '/wishlist': typeof WishlistRoute
   '/product/$productId': typeof ProductProductIdRoute
 }
@@ -121,8 +153,12 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/gift-cards': typeof GiftCardsRoute
   '/lookbook': typeof LookbookRoute
+  '/rewards': typeof RewardsRoute
   '/shop': typeof ShopRoute
+  '/style-quiz': typeof StyleQuizRoute
+  '/sustainability': typeof SustainabilityRoute
   '/track-order': typeof TrackOrderRoute
+  '/wardrobe-studio': typeof WardrobeStudioRoute
   '/wishlist': typeof WishlistRoute
   '/product/$productId': typeof ProductProductIdRoute
 }
@@ -137,8 +173,12 @@ export interface FileRouteTypes {
     | '/contact'
     | '/gift-cards'
     | '/lookbook'
+    | '/rewards'
     | '/shop'
+    | '/style-quiz'
+    | '/sustainability'
     | '/track-order'
+    | '/wardrobe-studio'
     | '/wishlist'
     | '/product/$productId'
   fileRoutesByTo: FileRoutesByTo
@@ -151,8 +191,12 @@ export interface FileRouteTypes {
     | '/contact'
     | '/gift-cards'
     | '/lookbook'
+    | '/rewards'
     | '/shop'
+    | '/style-quiz'
+    | '/sustainability'
     | '/track-order'
+    | '/wardrobe-studio'
     | '/wishlist'
     | '/product/$productId'
   id:
@@ -165,8 +209,12 @@ export interface FileRouteTypes {
     | '/contact'
     | '/gift-cards'
     | '/lookbook'
+    | '/rewards'
     | '/shop'
+    | '/style-quiz'
+    | '/sustainability'
     | '/track-order'
+    | '/wardrobe-studio'
     | '/wishlist'
     | '/product/$productId'
   fileRoutesById: FileRoutesById
@@ -180,8 +228,12 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   GiftCardsRoute: typeof GiftCardsRoute
   LookbookRoute: typeof LookbookRoute
+  RewardsRoute: typeof RewardsRoute
   ShopRoute: typeof ShopRoute
+  StyleQuizRoute: typeof StyleQuizRoute
+  SustainabilityRoute: typeof SustainabilityRoute
   TrackOrderRoute: typeof TrackOrderRoute
+  WardrobeStudioRoute: typeof WardrobeStudioRoute
   WishlistRoute: typeof WishlistRoute
   ProductProductIdRoute: typeof ProductProductIdRoute
 }
@@ -244,6 +296,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LookbookRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/rewards': {
+      id: '/rewards'
+      path: '/rewards'
+      fullPath: '/rewards'
+      preLoaderRoute: typeof RewardsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/shop': {
       id: '/shop'
       path: '/shop'
@@ -251,11 +310,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShopRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/style-quiz': {
+      id: '/style-quiz'
+      path: '/style-quiz'
+      fullPath: '/style-quiz'
+      preLoaderRoute: typeof StyleQuizRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sustainability': {
+      id: '/sustainability'
+      path: '/sustainability'
+      fullPath: '/sustainability'
+      preLoaderRoute: typeof SustainabilityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/track-order': {
       id: '/track-order'
       path: '/track-order'
       fullPath: '/track-order'
       preLoaderRoute: typeof TrackOrderRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/wardrobe-studio': {
+      id: '/wardrobe-studio'
+      path: '/wardrobe-studio'
+      fullPath: '/wardrobe-studio'
+      preLoaderRoute: typeof WardrobeStudioRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/wishlist': {
@@ -284,8 +364,12 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   GiftCardsRoute: GiftCardsRoute,
   LookbookRoute: LookbookRoute,
+  RewardsRoute: RewardsRoute,
   ShopRoute: ShopRoute,
+  StyleQuizRoute: StyleQuizRoute,
+  SustainabilityRoute: SustainabilityRoute,
   TrackOrderRoute: TrackOrderRoute,
+  WardrobeStudioRoute: WardrobeStudioRoute,
   WishlistRoute: WishlistRoute,
   ProductProductIdRoute: ProductProductIdRoute,
 }

@@ -47,9 +47,7 @@ export function RecentlyViewedProvider({ children }: { children: ReactNode }) {
     };
   }, [viewedIds]);
 
-  return (
-    <RecentlyViewedContext.Provider value={value}>{children}</RecentlyViewedContext.Provider>
-  );
+  return <RecentlyViewedContext.Provider value={value}>{children}</RecentlyViewedContext.Provider>;
 }
 
 export function useRecentlyViewed() {

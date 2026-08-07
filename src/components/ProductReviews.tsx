@@ -71,19 +71,21 @@ export function ProductReviews({ productId }: { productId: string }) {
       if (stored) {
         setReviews(JSON.parse(stored));
       } else {
-        setReviews(DEFAULT_REVIEWS[productId] || [
-          {
-            id: "d1",
-            productId,
-            author: "Astrid K.",
-            rating: 5,
-            date: "1 month ago",
-            title: "Sublime quality & material",
-            comment:
-              "Exceptional stitching and fabric drape. Feels like an heirloom garment built to last decades.",
-            verified: true,
-          },
-        ]);
+        setReviews(
+          DEFAULT_REVIEWS[productId] || [
+            {
+              id: "d1",
+              productId,
+              author: "Astrid K.",
+              rating: 5,
+              date: "1 month ago",
+              title: "Sublime quality & material",
+              comment:
+                "Exceptional stitching and fabric drape. Feels like an heirloom garment built to last decades.",
+              verified: true,
+            },
+          ],
+        );
       }
     } catch {
       /* fallback */
@@ -124,7 +126,8 @@ export function ProductReviews({ productId }: { productId: string }) {
   }
 
   const total = reviews.length;
-  const avgRating = total > 0 ? (reviews.reduce((acc, r) => acc + r.rating, 0) / total).toFixed(1) : "5.0";
+  const avgRating =
+    total > 0 ? (reviews.reduce((acc, r) => acc + r.rating, 0) / total).toFixed(1) : "5.0";
 
   return (
     <div className="mt-20 border-t border-border pt-16">
@@ -138,12 +141,18 @@ export function ProductReviews({ productId }: { productId: string }) {
                 <Star
                   key={star}
                   size={16}
-                  className={star <= Math.round(Number(avgRating)) ? "fill-amber-500 text-amber-500" : "text-border"}
+                  className={
+                    star <= Math.round(Number(avgRating))
+                      ? "fill-amber-500 text-amber-500"
+                      : "text-border"
+                  }
                 />
               ))}
             </div>
             <span className="text-sm font-medium tabular-nums">{avgRating} out of 5</span>
-            <span className="text-xs text-muted-foreground">({total} {total === 1 ? "review" : "reviews"})</span>
+            <span className="text-xs text-muted-foreground">
+              ({total} {total === 1 ? "review" : "reviews"})
+            </span>
           </div>
         </div>
 
@@ -257,7 +266,10 @@ export function ProductReviews({ productId }: { productId: string }) {
                 />
               </div>
 
-              <button type="submit" className="btn-solid w-full py-3 text-xs uppercase tracking-widest">
+              <button
+                type="submit"
+                className="btn-solid w-full py-3 text-xs uppercase tracking-widest"
+              >
                 Submit Review
               </button>
             </form>

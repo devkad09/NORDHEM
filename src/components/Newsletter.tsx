@@ -34,7 +34,10 @@ export function Newsletter({ compact = false }: { compact?: boolean }) {
           aria-label="Email address"
           className="field"
         />
-        <button type="submit" className="eyebrow link-underline whitespace-nowrap pb-2 text-foreground">
+        <button
+          type="submit"
+          className="eyebrow link-underline whitespace-nowrap pb-2 text-foreground"
+        >
           Sign up
         </button>
       </div>

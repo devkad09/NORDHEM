@@ -111,7 +111,14 @@ function ProductDetail() {
                   active === i ? "border-foreground" : "border-transparent hover:border-border"
                 }`}
               >
-                <img src={src} alt="" loading="lazy" width={900} height={1200} className="object-cover" />
+                <img
+                  src={src}
+                  alt=""
+                  loading="lazy"
+                  width={900}
+                  height={1200}
+                  className="object-cover"
+                />
               </button>
             ))}
           </div>
@@ -145,7 +152,9 @@ function ProductDetail() {
                 {size ? (
                   <span className="text-xs font-medium text-foreground">• {size} selected</span>
                 ) : (
-                  <span className={`text-xs ${sizeError ? "text-destructive font-medium" : "text-muted-foreground"}`}>
+                  <span
+                    className={`text-xs ${sizeError ? "text-destructive font-medium" : "text-muted-foreground"}`}
+                  >
                     {sizeError ? "Selection required" : "Select a size"}
                   </span>
                 )}
@@ -227,13 +236,8 @@ function ProductDetail() {
               aria-label={wishlisted ? "Remove from wishlist" : "Add to wishlist"}
               className="btn-outline flex items-center justify-center gap-2 px-4"
             >
-              <Heart
-                size={16}
-                className={wishlisted ? "fill-foreground text-foreground" : ""}
-              />
-              <span className="hidden sm:inline text-xs">
-                {wishlisted ? "Saved" : "Save"}
-              </span>
+              <Heart size={16} className={wishlisted ? "fill-foreground text-foreground" : ""} />
+              <span className="hidden sm:inline text-xs">{wishlisted ? "Saved" : "Save"}</span>
             </button>
             <button
               onClick={() => setShowShareModal(true)}
@@ -268,7 +272,8 @@ function ProductDetail() {
             <p className="eyebrow">Measurements</p>
             <h3 className="mt-1 font-display text-2xl">Size Guide</h3>
             <p className="mt-2 text-xs text-muted-foreground">
-              Nordhem pieces are cut for an understated, relaxed Scandinavian fit. If you prefer a tailored fit, choose one size down.
+              Nordhem pieces are cut for an understated, relaxed Scandinavian fit. If you prefer a
+              tailored fit, choose one size down.
             </p>
 
             <div className="mt-6 overflow-x-auto">
@@ -338,9 +343,7 @@ function ProductDetail() {
       )}
 
       {/* Share Piece Modal */}
-      {showShareModal && (
-        <ShareModal product={product} onClose={() => setShowShareModal(false)} />
-      )}
+      {showShareModal && <ShareModal product={product} onClose={() => setShowShareModal(false)} />}
 
       <section className="mt-28">
         <h2 className="border-b border-border pb-5 font-display text-2xl">You may also like</h2>
@@ -371,4 +374,3 @@ function ProductDetail() {
     </div>
   );
 }
-

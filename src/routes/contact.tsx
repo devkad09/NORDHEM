@@ -27,7 +27,8 @@ function Contact() {
   function validate(): Errors {
     const next: Errors = {};
     if (form.name.trim().length < 2) next.name = "Please enter your name.";
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(form.email)) next.email = "Enter a valid email address.";
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(form.email))
+      next.email = "Enter a valid email address.";
     if (form.message.trim().length < 10) next.message = "A little more detail, please.";
     return next;
   }

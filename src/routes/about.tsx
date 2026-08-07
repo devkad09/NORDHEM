@@ -1,6 +1,14 @@
 import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Sparkles, ShieldCheck, Feather, Compass, HeartHandshake, CheckCircle2 } from "lucide-react";
+import {
+  ArrowRight,
+  Sparkles,
+  ShieldCheck,
+  Feather,
+  Compass,
+  HeartHandshake,
+  CheckCircle2,
+} from "lucide-react";
 import look1 from "@/assets/look-1.jpg";
 import look2 from "@/assets/look-2.jpg";
 import look3 from "@/assets/look-3.jpg";
@@ -86,7 +94,9 @@ function AboutPage() {
             Clothes designed for quiet permanence, not next season’s landfill.
           </h1>
           <p className="mx-auto max-w-2xl text-sm leading-relaxed text-muted-foreground md:text-base">
-            Nordhem was founded with a singular conviction: to craft an unhurried, essential wardrobe from the finest natural Scandinavian materials, tailored to be worn for a decade.
+            Nordhem was founded with a singular conviction: to craft an unhurried, essential
+            wardrobe from the finest natural Scandinavian materials, tailored to be worn for a
+            decade.
           </p>
         </div>
 
@@ -99,7 +109,9 @@ function AboutPage() {
             { label: "Lifetime Garment Repair", value: "Included" },
           ].map((metric) => (
             <div key={metric.label} className="space-y-1">
-              <p className="font-display text-3xl md:text-4xl text-foreground font-light">{metric.value}</p>
+              <p className="font-display text-3xl md:text-4xl text-foreground font-light">
+                {metric.value}
+              </p>
               <p className="eyebrow text-[0.65rem] text-muted-foreground">{metric.label}</p>
             </div>
           ))}
@@ -128,13 +140,19 @@ function AboutPage() {
             </h2>
             <div className="space-y-4 text-sm leading-relaxed text-muted-foreground">
               <p>
-                After working as a senior pattern designer in Paris and Stockholm, I grew disillusioned with the relentless pace of commercial apparel. We were creating garments designed to fall apart in six washes so customers would buy again.
+                After working as a senior pattern designer in Paris and Stockholm, I grew
+                disillusioned with the relentless pace of commercial apparel. We were creating
+                garments designed to fall apart in six washes so customers would buy again.
               </p>
               <p>
-                In 2019, I returned home to Copenhagen and rented a small light-filled workshop in Nørrebro. I spent eight months perfecting a single Gotland wool coat pattern before making our first eleven pieces.
+                In 2019, I returned home to Copenhagen and rented a small light-filled workshop in
+                Nørrebro. I spent eight months perfecting a single Gotland wool coat pattern before
+                making our first eleven pieces.
               </p>
               <p>
-                Nordhem is the antithesis of modern fast fashion. We don’t run sales. We don’t overproduce. We work directly with small family mills in Portugal, Scotland, and Italy who share our reverence for texture, durability, and quiet elegance.
+                Nordhem is the antithesis of modern fast fashion. We don’t run sales. We don’t
+                overproduce. We work directly with small family mills in Portugal, Scotland, and
+                Italy who share our reverence for texture, durability, and quiet elegance.
               </p>
             </div>
 
@@ -169,9 +187,14 @@ function AboutPage() {
                     : "border-border bg-card text-foreground hover:border-foreground/60"
                 }`}
               >
-                <Icon size={20} className={isActive ? "text-background" : "text-muted-foreground"} />
+                <Icon
+                  size={20}
+                  className={isActive ? "text-background" : "text-muted-foreground"}
+                />
                 <span className="mt-4 font-sans text-sm font-medium">{pillar.title}</span>
-                <span className={`mt-1 text-xs ${isActive ? "text-background/80" : "text-muted-foreground"}`}>
+                <span
+                  className={`mt-1 text-xs ${isActive ? "text-background/80" : "text-muted-foreground"}`}
+                >
                   {pillar.subtitle}
                 </span>
               </button>
@@ -191,7 +214,11 @@ function AboutPage() {
             </p>
 
             <ul className="space-y-2 pt-2 text-xs font-medium text-foreground">
-              {["100% Traceable supply chain", "Fair living wages for all artisans", "Recyclable plastic-free packaging"].map((item) => (
+              {[
+                "100% Traceable supply chain",
+                "Fair living wages for all artisans",
+                "Recyclable plastic-free packaging",
+              ].map((item) => (
                 <li key={item} className="flex items-center gap-2">
                   <CheckCircle2 size={14} className="text-emerald-700" />
                   {item}
@@ -200,7 +227,10 @@ function AboutPage() {
             </ul>
 
             <div className="pt-4">
-              <Link to="/shop" className="btn-solid inline-flex items-center gap-2 text-xs uppercase tracking-widest">
+              <Link
+                to="/shop"
+                className="btn-solid inline-flex items-center gap-2 text-xs uppercase tracking-widest"
+              >
                 Explore The Collection <ArrowRight size={14} />
               </Link>
             </div>
@@ -222,7 +252,8 @@ function AboutPage() {
           <p className="eyebrow">Material Tactility</p>
           <h2 className="mt-2 font-display text-3xl">Selected Natural Fibres</h2>
           <p className="mt-3 text-xs text-muted-foreground max-w-xl mx-auto">
-            Every yarn and cloth is chosen for its structural weight, breathability, and capacity to age gracefully.
+            Every yarn and cloth is chosen for its structural weight, breathability, and capacity to
+            age gracefully.
           </p>
         </div>
 
@@ -257,7 +288,10 @@ function AboutPage() {
               image: look5,
             },
           ].map((mat) => (
-            <div key={mat.title} className="group border border-border bg-card p-5 transition-all hover:border-foreground">
+            <div
+              key={mat.title}
+              className="group border border-border bg-card p-5 transition-all hover:border-foreground"
+            >
               <div className="aspect-square overflow-hidden bg-secondary mb-4">
                 <img
                   src={mat.image}
@@ -265,7 +299,9 @@ function AboutPage() {
                   className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
               </div>
-              <p className="eyebrow text-[0.65rem] text-muted-foreground">{mat.origin} • {mat.weight}</p>
+              <p className="eyebrow text-[0.65rem] text-muted-foreground">
+                {mat.origin} • {mat.weight}
+              </p>
               <h3 className="mt-1 font-display text-xl">{mat.title}</h3>
               <p className="mt-2 text-xs text-muted-foreground leading-relaxed">{mat.desc}</p>
             </div>
@@ -277,15 +313,21 @@ function AboutPage() {
       <section className="mx-auto max-w-5xl px-5 text-center">
         <div className="border border-border bg-card py-16 px-8 shadow-sm">
           <p className="eyebrow">Experience Nordhem</p>
-          <h2 className="mt-2 font-display text-3xl md:text-4xl">Ready to discover your essential wardrobe?</h2>
+          <h2 className="mt-2 font-display text-3xl md:text-4xl">
+            Ready to discover your essential wardrobe?
+          </h2>
           <p className="mx-auto mt-4 max-w-lg text-xs text-muted-foreground leading-relaxed">
-            Browse our small-batch archive of coats, knitwear, shirts, and trousers. Free worldwide carbon-neutral shipping and lifetime mending included.
+            Browse our small-batch archive of coats, knitwear, shirts, and trousers. Free worldwide
+            carbon-neutral shipping and lifetime mending included.
           </p>
           <div className="mt-8 flex justify-center gap-4">
             <Link to="/shop" className="btn-solid py-3.5 px-8 text-xs uppercase tracking-widest">
               View Shop
             </Link>
-            <Link to="/lookbook" className="btn-outline py-3.5 px-8 text-xs uppercase tracking-widest">
+            <Link
+              to="/lookbook"
+              className="btn-outline py-3.5 px-8 text-xs uppercase tracking-widest"
+            >
               View Lookbook
             </Link>
           </div>
@@ -294,4 +336,3 @@ function AboutPage() {
     </div>
   );
 }
-

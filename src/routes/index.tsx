@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ChevronDown, ArrowRight } from "lucide-react";
+import { ChevronDown, ArrowRight, Layers, Sparkles, Award, Leaf } from "lucide-react";
 import heroImage from "@/assets/hero.jpg";
 import { products, lookbook } from "@/data/products";
 import { ProductCard } from "@/components/ProductCard";
@@ -148,15 +148,103 @@ function Home() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent p-5 flex flex-col justify-end">
                 <p className="eyebrow text-[0.65rem] text-muted-foreground">{cat.count}</p>
-                <h3 className="font-display text-2xl text-foreground group-hover:translate-x-1 transition-transform">{cat.name}</h3>
+                <h3 className="font-display text-2xl text-foreground group-hover:translate-x-1 transition-transform">
+                  {cat.name}
+                </h3>
               </div>
             </Link>
           ))}
         </div>
       </section>
 
+      {/* Interactive Studio Experience Grid */}
+      <section className="mx-auto mt-20 max-w-[110rem] px-5 md:px-10">
+        <div className="border-b border-border pb-5">
+          <p className="eyebrow">Interactive Features</p>
+          <h2 className="font-display text-2xl md:text-4xl mt-1">The Nordhem Studio Experience</h2>
+        </div>
+
+        <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <Link
+            to="/wardrobe-studio"
+            className="group border border-border bg-card p-6 rounded-xs hover:border-foreground/50 transition-all flex flex-col justify-between"
+          >
+            <div>
+              <div className="p-3 bg-secondary/80 text-clay border border-border rounded-xs w-fit mb-4 group-hover:bg-clay group-hover:text-clay-foreground transition-colors">
+                <Layers size={20} />
+              </div>
+              <h3 className="font-display text-2xl text-foreground">Wardrobe Studio</h3>
+              <p className="text-xs text-muted-foreground mt-2 leading-relaxed">
+                Mix and match outerwear, knitwear, and tailoring on an interactive canvas with live
+                material composition.
+              </p>
+            </div>
+            <div className="mt-6 text-xs font-medium text-foreground flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+              Open Canvas <ArrowRight size={13} />
+            </div>
+          </Link>
+
+          <Link
+            to="/style-quiz"
+            className="group border border-border bg-card p-6 rounded-xs hover:border-foreground/50 transition-all flex flex-col justify-between"
+          >
+            <div>
+              <div className="p-3 bg-secondary/80 text-clay border border-border rounded-xs w-fit mb-4 group-hover:bg-clay group-hover:text-clay-foreground transition-colors">
+                <Sparkles size={20} />
+              </div>
+              <h3 className="font-display text-2xl text-foreground">Style Quiz Matcher</h3>
+              <p className="text-xs text-muted-foreground mt-2 leading-relaxed">
+                Answer 3 quick questions to receive a tailored 3-piece capsule wardrobe & earn +200
+                Nordic Circle points.
+              </p>
+            </div>
+            <div className="mt-6 text-xs font-medium text-foreground flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+              Take Quiz <ArrowRight size={13} />
+            </div>
+          </Link>
+
+          <Link
+            to="/rewards"
+            className="group border border-border bg-card p-6 rounded-xs hover:border-foreground/50 transition-all flex flex-col justify-between"
+          >
+            <div>
+              <div className="p-3 bg-secondary/80 text-clay border border-border rounded-xs w-fit mb-4 group-hover:bg-clay group-hover:text-clay-foreground transition-colors">
+                <Award size={20} />
+              </div>
+              <h3 className="font-display text-2xl text-foreground">Nordic Circle VIP</h3>
+              <p className="text-xs text-muted-foreground mt-2 leading-relaxed">
+                Unlock points balance, free eco express shipping, tailor repair credits, and early
+                private archive access.
+              </p>
+            </div>
+            <div className="mt-6 text-xs font-medium text-foreground flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+              View Perks <ArrowRight size={13} />
+            </div>
+          </Link>
+
+          <Link
+            to="/sustainability"
+            className="group border border-border bg-card p-6 rounded-xs hover:border-foreground/50 transition-all flex flex-col justify-between"
+          >
+            <div>
+              <div className="p-3 bg-secondary/80 text-clay border border-border rounded-xs w-fit mb-4 group-hover:bg-clay group-hover:text-clay-foreground transition-colors">
+                <Leaf size={20} />
+              </div>
+              <h3 className="font-display text-2xl text-foreground">Eco Traceability</h3>
+              <p className="text-xs text-muted-foreground mt-2 leading-relaxed">
+                Trace Gotland wool and Normandy linen origins, calculate water savings, and submit
+                garment repair requests.
+              </p>
+            </div>
+            <div className="mt-6 text-xs font-medium text-foreground flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+              Inspect Origins <ArrowRight size={13} />
+            </div>
+          </Link>
+        </div>
+      </section>
+
       {/* Featured Collection with Staggered Card Entrance */}
-      <section className="mx-auto max-w-[110rem] px-5 md:px-10">
+      <section className="mx-auto mt-24 max-w-[110rem] px-5 md:px-10">
         <div className="flex items-end justify-between border-b border-border pb-5">
           <h2 className="font-display text-2xl md:text-3xl">Featured Collection</h2>
           <Link to="/shop" className="eyebrow link-underline text-foreground">
@@ -228,4 +316,3 @@ function Home() {
     </div>
   );
 }
-

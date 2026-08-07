@@ -8,7 +8,11 @@
     "hoverImage": "look-2",
     "sizes": ["XS", "S", "M", "L", "XL"],
     "description": "A long, unstructured coat cut from undyed Gotland wool. Softly tailored shoulders, patch pockets, and a belt you can leave undone. Made to be worn for a decade.",
-    "details": ["80% virgin wool, 20% alpaca", "Unlined body, cupro sleeve lining", "Woven in Portugal"],
+    "details": [
+      "80% virgin wool, 20% alpaca",
+      "Unlined body, cupro sleeve lining",
+      "Woven in Portugal"
+    ],
     "featured": true
   },
   {
@@ -33,7 +37,12 @@
     "sizes": ["XS", "S", "M", "L", "XL"],
     "outOfStockSizes": ["XL"],
     "description": "A weather-resistant field jacket in heavy dark olive waxed cotton. Stand collar with storm flap, bellows pockets, and a soft flannel lining. Built to withstand coastal autumn winds.",
-    "details": ["100% heavy organic cotton with paraffin wax", "Cotton flannel body lining", "Corozo buttons and brass zip", "Made in Portugal"],
+    "details": [
+      "100% heavy organic cotton with paraffin wax",
+      "Cotton flannel body lining",
+      "Corozo buttons and brass zip",
+      "Made in Portugal"
+    ],
     "featured": true
   },
   {
@@ -46,7 +55,12 @@
     "sizes": ["XS", "S", "M", "L"],
     "outOfStockSizes": ["XS"],
     "description": "A relaxed overshirt jacket cut from dense oat wool twill with a plush natural lamb shearling collar. Double chest pockets, horn buttons, and an unlined easy fit for layering.",
-    "details": ["100% natural wool twill", "100% genuine lamb shearling collar", "Horn buttons", "Dry clean only"],
+    "details": [
+      "100% natural wool twill",
+      "100% genuine lamb shearling collar",
+      "Horn buttons",
+      "Dry clean only"
+    ],
     "featured": true
   },
   {
@@ -166,7 +180,11 @@
     "hoverImage": "look-1",
     "sizes": ["XS", "S", "M", "L", "XL"],
     "description": "A heavy 4-ply charcoal Mongolian cashmere sweater with chunky 2x2 ribbed collar and cuffs. Exceptionally soft and warm.",
-    "details": ["100% 4-ply Mongolian Cashmere", "Seamless 3D knit construction", "Dry clean or hand wash cold"],
+    "details": [
+      "100% 4-ply Mongolian Cashmere",
+      "Seamless 3D knit construction",
+      "Dry clean or hand wash cold"
+    ],
     "featured": true
   }
 ]

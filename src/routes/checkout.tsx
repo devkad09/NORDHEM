@@ -57,7 +57,9 @@ function CheckoutPage() {
   const search = Route.useSearch();
 
   const initialPromo = search.promo ? search.promo.toUpperCase() : null;
-  const [promoCode, setPromoCode] = useState<string | null>(initialPromo && PROMO_CODES[initialPromo] ? initialPromo : null);
+  const [promoCode, setPromoCode] = useState<string | null>(
+    initialPromo && PROMO_CODES[initialPromo] ? initialPromo : null,
+  );
 
   // Form State
   const [email, setEmail] = useState("");
@@ -127,14 +129,20 @@ function CheckoutPage() {
           <p className="eyebrow mt-6 text-muted-foreground">Order Confirmed</p>
           <h1 className="mt-2 font-display text-3xl md:text-4xl">Thank you for your order</h1>
           <p className="mt-2 text-sm text-muted-foreground">
-            Order <span className="font-mono font-medium text-foreground">#{orderConfirmed.orderId}</span> has been placed. A confirmation email was sent to <span className="text-foreground">{orderConfirmed.email}</span>.
+            Order{" "}
+            <span className="font-mono font-medium text-foreground">#{orderConfirmed.orderId}</span>{" "}
+            has been placed. A confirmation email was sent to{" "}
+            <span className="text-foreground">{orderConfirmed.email}</span>.
           </p>
 
           <div className="my-10 border-t border-border pt-8 text-left">
             <h2 className="eyebrow mb-4">Summary</h2>
             <div className="divide-y divide-border">
               {orderConfirmed.items.map((item) => (
-                <div key={`${item.id}-${item.size}`} className="flex items-center justify-between py-3 text-sm">
+                <div
+                  key={`${item.id}-${item.size}`}
+                  className="flex items-center justify-between py-3 text-sm"
+                >
                   <div className="flex items-center gap-4">
                     <img src={item.imageUrl} alt={item.name} className="h-12 w-10 object-cover" />
                     <div>
@@ -151,8 +159,14 @@ function CheckoutPage() {
 
             <div className="mt-6 border-t border-border pt-4 text-xs space-y-2">
               <div className="flex justify-between">
-                <span className="text-muted-foreground">Shipping ({orderConfirmed.shippingMethod === "express" ? "Express" : "Standard"})</span>
-                <span>{orderConfirmed.shippingCost === 0 ? "Complimentary" : formatPrice(orderConfirmed.shippingCost)}</span>
+                <span className="text-muted-foreground">
+                  Shipping ({orderConfirmed.shippingMethod === "express" ? "Express" : "Standard"})
+                </span>
+                <span>
+                  {orderConfirmed.shippingCost === 0
+                    ? "Complimentary"
+                    : formatPrice(orderConfirmed.shippingCost)}
+                </span>
               </div>
               <div className="flex justify-between text-sm font-medium pt-2 border-t border-border">
                 <span>Total Paid</span>
@@ -163,8 +177,10 @@ function CheckoutPage() {
             <div className="mt-6 rounded bg-secondary/50 p-4 text-xs">
               <p className="font-medium text-foreground">Shipping Address</p>
               <p className="mt-1 text-muted-foreground">
-                {orderConfirmed.firstName} {orderConfirmed.lastName}<br />
-                {orderConfirmed.address}<br />
+                {orderConfirmed.firstName} {orderConfirmed.lastName}
+                <br />
+                {orderConfirmed.address}
+                <br />
                 {orderConfirmed.postalCode} {orderConfirmed.city}, {orderConfirmed.country}
               </p>
             </div>
@@ -201,7 +217,10 @@ function CheckoutPage() {
   return (
     <div className="mx-auto max-w-7xl px-5 py-10 md:py-16">
       <div className="mb-8">
-        <Link to="/cart" className="inline-flex items-center gap-2 text-xs text-muted-foreground hover:text-foreground">
+        <Link
+          to="/cart"
+          className="inline-flex items-center gap-2 text-xs text-muted-foreground hover:text-foreground"
+        >
           <ArrowLeft className="h-3.5 w-3.5" /> Return to cart
         </Link>
         <h1 className="mt-4 font-display text-3xl md:text-4xl">Checkout</h1>
@@ -324,7 +343,9 @@ function CheckoutPage() {
             <div className="space-y-3">
               <label
                 className={`flex items-center justify-between border p-4 cursor-pointer transition-colors ${
-                  shippingMethod === "standard" ? "border-foreground bg-secondary/30" : "border-border"
+                  shippingMethod === "standard"
+                    ? "border-foreground bg-secondary/30"
+                    : "border-border"
                 }`}
               >
                 <div className="flex items-center gap-3">
@@ -336,7 +357,8 @@ function CheckoutPage() {
                   />
                   <div>
                     <p className="text-sm font-medium flex items-center gap-2">
-                      <Truck className="h-4 w-4 text-muted-foreground" /> Standard Courier (3-5 business days)
+                      <Truck className="h-4 w-4 text-muted-foreground" /> Standard Courier (3-5
+                      business days)
                     </p>
                     <p className="text-xs text-muted-foreground mt-0.5">Climate neutral delivery</p>
                   </div>
@@ -346,7 +368,9 @@ function CheckoutPage() {
 
               <label
                 className={`flex items-center justify-between border p-4 cursor-pointer transition-colors ${
-                  shippingMethod === "express" ? "border-foreground bg-secondary/30" : "border-border"
+                  shippingMethod === "express"
+                    ? "border-foreground bg-secondary/30"
+                    : "border-border"
                 }`}
               >
                 <div className="flex items-center gap-3">
@@ -358,9 +382,12 @@ function CheckoutPage() {
                   />
                   <div>
                     <p className="text-sm font-medium flex items-center gap-2">
-                      <Truck className="h-4 w-4 text-muted-foreground" /> Express Courier (1-2 business days)
+                      <Truck className="h-4 w-4 text-muted-foreground" /> Express Courier (1-2
+                      business days)
                     </p>
-                    <p className="text-xs text-muted-foreground mt-0.5">Priority handling & tracked shipping</p>
+                    <p className="text-xs text-muted-foreground mt-0.5">
+                      Priority handling & tracked shipping
+                    </p>
                   </div>
                 </div>
                 <span className="text-sm font-medium">{formatPrice(25)}</span>
@@ -464,7 +491,9 @@ function CheckoutPage() {
                         Size {line.size} • Qty {line.qty}
                       </p>
                     </div>
-                    <p className="text-sm tabular-nums">{formatPrice(line.product.price * line.qty)}</p>
+                    <p className="text-sm tabular-nums">
+                      {formatPrice(line.product.price * line.qty)}
+                    </p>
                   </div>
                 </div>
               ))}

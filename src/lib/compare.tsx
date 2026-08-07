@@ -56,8 +56,7 @@ export function CompareProvider({ children }: { children: ReactNode }) {
           }
           return [...prev, id];
         }),
-      removeCompare: (id: string) =>
-        setCompareIds((prev) => prev.filter((item) => item !== id)),
+      removeCompare: (id: string) => setCompareIds((prev) => prev.filter((item) => item !== id)),
       clearCompare: () => setCompareIds([]),
     };
   }, [compareIds, isOpen]);

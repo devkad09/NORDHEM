@@ -23,7 +23,8 @@ export function FreeShippingBar({ subtotalEur }: { subtotalEur: number }) {
             </span>
           ) : (
             <span>
-              Add <strong className="text-foreground">{formatPrice(remainingEur)}</strong> more for Free Shipping
+              Add <strong className="text-foreground">{formatPrice(remainingEur)}</strong> more for
+              Free Shipping
             </span>
           )}
         </span>

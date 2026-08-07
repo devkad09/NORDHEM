@@ -20,11 +20,7 @@ export function ProductCard({ product }: { product: Product }) {
     <>
       <div className="group relative block">
         <div className="relative overflow-hidden bg-secondary">
-          <Link
-            to="/product/$productId"
-            params={{ productId: product.id }}
-            className="block"
-          >
+          <Link to="/product/$productId" params={{ productId: product.id }} className="block">
             <img
               src={product.imageUrl}
               alt={product.name}
@@ -82,7 +78,9 @@ export function ProductCard({ product }: { product: Product }) {
             }}
             aria-label={comparing ? "Remove from comparison" : "Compare piece"}
             className={`rounded-full p-2 backdrop-blur-sm transition-all hover:scale-110 ${
-              comparing ? "bg-foreground text-background" : "bg-background/80 text-foreground/70 hover:bg-background hover:text-foreground"
+              comparing
+                ? "bg-foreground text-background"
+                : "bg-background/80 text-foreground/70 hover:bg-background hover:text-foreground"
             }`}
           >
             <SlidersHorizontal size={14} />

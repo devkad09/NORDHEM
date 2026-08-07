@@ -3,13 +3,7 @@ import { X, Copy, Check, Share2, Send } from "lucide-react";
 import { toast } from "sonner";
 import { type Product } from "@/data/products";
 
-export function ShareModal({
-  product,
-  onClose,
-}: {
-  product: Product;
-  onClose: () => void;
-}) {
+export function ShareModal({ product, onClose }: { product: Product; onClose: () => void }) {
   const [copied, setCopied] = useState(false);
   const shareUrl = typeof window !== "undefined" ? window.location.href : "";
 

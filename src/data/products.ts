@@ -63,7 +63,15 @@ export type Product = {
 export const products: Product[] = (raw as Omit<Product, "imageUrl" | "hoverImageUrl">[]).map(
   (p) => ({
     ...p,
-    outOfStockSizes: p.outOfStockSizes ?? (p.id.endsWith("coat") ? ["XL"] : p.id.endsWith("jacket") ? ["XS"] : p.id.includes("wide") ? ["24"] : []),
+    outOfStockSizes:
+      p.outOfStockSizes ??
+      (p.id.endsWith("coat")
+        ? ["XL"]
+        : p.id.endsWith("jacket")
+          ? ["XS"]
+          : p.id.includes("wide")
+            ? ["24"]
+            : []),
     imageUrl: imageMap[p.image] ?? coat,
     hoverImageUrl: imageMap[p.hoverImage] ?? coat,
   }),

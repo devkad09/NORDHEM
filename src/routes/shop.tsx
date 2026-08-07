@@ -112,10 +112,18 @@ function Shop() {
               onChange={(e) => setSort(e.target.value as Sort)}
               className="border-b border-border bg-transparent py-1 text-xs focus:border-foreground focus:outline-none cursor-pointer"
             >
-              <option value="featured" className="bg-card">Featured</option>
-              <option value="price-asc" className="bg-card">Price: low to high</option>
-              <option value="price-desc" className="bg-card">Price: high to low</option>
-              <option value="name-asc" className="bg-card">Name: A-Z</option>
+              <option value="featured" className="bg-card">
+                Featured
+              </option>
+              <option value="price-asc" className="bg-card">
+                Price: low to high
+              </option>
+              <option value="price-desc" className="bg-card">
+                Price: high to low
+              </option>
+              <option value="name-asc" className="bg-card">
+                Name: A-Z
+              </option>
             </select>
           </label>
         </div>
@@ -162,4 +170,3 @@ function Shop() {
     </div>
   );
 }
-

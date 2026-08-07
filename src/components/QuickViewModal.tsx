@@ -7,13 +7,7 @@ import { useWishlist } from "@/lib/wishlist";
 import { useCurrency } from "@/lib/currency";
 import { toast } from "sonner";
 
-export function QuickViewModal({
-  product,
-  onClose,
-}: {
-  product: Product;
-  onClose: () => void;
-}) {
+export function QuickViewModal({ product, onClose }: { product: Product; onClose: () => void }) {
   const { add } = useCart();
   const { isWishlisted, toggle } = useWishlist();
   const { formatPrice } = useCurrency();
@@ -77,9 +71,7 @@ export function QuickViewModal({
           <div>
             <p className="eyebrow">{product.category}</p>
             <h2 className="mt-2 font-display text-2xl md:text-3xl">{product.name}</h2>
-            <p className="mt-2 text-base tabular-nums font-medium">
-              {formatPrice(product.price)}
-            </p>
+            <p className="mt-2 text-base tabular-nums font-medium">{formatPrice(product.price)}</p>
 
             <p className="mt-4 text-xs text-muted-foreground leading-relaxed line-clamp-3">
               {product.description}

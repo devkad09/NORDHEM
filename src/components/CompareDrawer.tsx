@@ -23,7 +23,10 @@ export function CompareDrawer() {
             </span>
             <div className="hidden sm:flex items-center gap-2">
               {compareProducts.map((p) => (
-                <div key={p.id} className="flex items-center gap-1.5 rounded bg-secondary px-2 py-1 text-xs">
+                <div
+                  key={p.id}
+                  className="flex items-center gap-1.5 rounded bg-secondary px-2 py-1 text-xs"
+                >
                   <span className="truncate max-w-[100px] font-medium">{p.name}</span>
                   <button
                     onClick={() => removeCompare(p.id)}
@@ -77,23 +80,35 @@ export function CompareDrawer() {
               </thead>
               <tbody className="divide-y divide-border/60">
                 <tr>
-                  <td className="py-3 px-4 font-semibold text-muted-foreground eyebrow">Category</td>
+                  <td className="py-3 px-4 font-semibold text-muted-foreground eyebrow">
+                    Category
+                  </td>
                   {compareProducts.map((p) => (
-                    <td key={p.id} className="py-3 px-4">{p.category}</td>
+                    <td key={p.id} className="py-3 px-4">
+                      {p.category}
+                    </td>
                   ))}
                 </tr>
                 <tr>
-                  <td className="py-3 px-4 font-semibold text-muted-foreground eyebrow">Available Sizes</td>
+                  <td className="py-3 px-4 font-semibold text-muted-foreground eyebrow">
+                    Available Sizes
+                  </td>
                   {compareProducts.map((p) => (
-                    <td key={p.id} className="py-3 px-4 font-mono">{p.sizes.join(", ")}</td>
+                    <td key={p.id} className="py-3 px-4 font-mono">
+                      {p.sizes.join(", ")}
+                    </td>
                   ))}
                 </tr>
                 <tr>
-                  <td className="py-3 px-4 font-semibold text-muted-foreground eyebrow">Fabric & Details</td>
+                  <td className="py-3 px-4 font-semibold text-muted-foreground eyebrow">
+                    Fabric & Details
+                  </td>
                   {compareProducts.map((p) => (
                     <td key={p.id} className="py-3 px-4 space-y-1">
                       {p.details.map((d, i) => (
-                        <p key={i} className="text-muted-foreground">• {d}</p>
+                        <p key={i} className="text-muted-foreground">
+                          • {d}
+                        </p>
                       ))}
                     </td>
                   ))}

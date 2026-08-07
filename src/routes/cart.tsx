@@ -99,7 +99,9 @@ function Cart() {
                   </Link>
                   <p className="eyebrow mt-1">Size {line.size}</p>
                 </div>
-                <p className="text-sm tabular-nums font-medium">{formatPrice(line.product.price * line.qty)}</p>
+                <p className="text-sm tabular-nums font-medium">
+                  {formatPrice(line.product.price * line.qty)}
+                </p>
               </div>
 
               <div className="mt-4 flex items-center justify-between">
@@ -136,7 +138,10 @@ function Cart() {
         <form onSubmit={handleApplyPromo} className="w-full max-w-xs space-y-2">
           <div className="flex gap-2">
             <div className="relative flex-1">
-              <Tag size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+              <Tag
+                size={14}
+                className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+              />
               <input
                 type="text"
                 placeholder="Promo code (e.g. WELCOME20)"
@@ -155,7 +160,8 @@ function Cart() {
           {appliedPromo && (
             <div className="flex items-center justify-between rounded bg-secondary/80 px-3 py-1.5 text-xs">
               <span className="flex items-center gap-1.5 text-foreground font-medium">
-                <Check size={12} className="text-emerald-600" /> Code <strong>{appliedPromo}</strong> ({promoInfo?.label})
+                <Check size={12} className="text-emerald-600" /> Code{" "}
+                <strong>{appliedPromo}</strong> ({promoInfo?.label})
               </span>
               <button
                 type="button"
@@ -190,9 +196,7 @@ function Cart() {
           </div>
         </div>
 
-        <p className="text-xs text-muted-foreground">
-          Shipping and taxes calculated at checkout.
-        </p>
+        <p className="text-xs text-muted-foreground">Shipping and taxes calculated at checkout.</p>
 
         <Link
           to="/checkout"

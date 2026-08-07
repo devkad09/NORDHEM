@@ -7,7 +7,11 @@ export const Route = createFileRoute("/care-guide")({
   head: () => ({
     meta: [
       { title: "Garment Care & Lifetime Mending — Nordhem" },
-      { name: "description", content: "Learn how to care for Gotland wool, alpaca, linen, and claim free lifetime repairs." },
+      {
+        name: "description",
+        content:
+          "Learn how to care for Gotland wool, alpaca, linen, and claim free lifetime repairs.",
+      },
     ],
   }),
   component: CareGuidePage,
@@ -51,7 +55,9 @@ function CareGuidePage() {
   function handleClaim(e: React.FormEvent) {
     e.preventDefault();
     setClaimSubmitted(true);
-    toast.success("Lifetime mending claim received. Our atelier will reach out with prepaid shipping details.");
+    toast.success(
+      "Lifetime mending claim received. Our atelier will reach out with prepaid shipping details.",
+    );
   }
 
   return (
@@ -62,7 +68,8 @@ function CareGuidePage() {
         </p>
         <h1 className="font-display text-4xl md:text-5xl">Garment Care & Lifetime Repair</h1>
         <p className="mx-auto max-w-md text-xs text-muted-foreground leading-relaxed">
-          Nordhem garments are built for a decade. Proper care preserves natural oils, yarn elasticity, and structural drape.
+          Nordhem garments are built for a decade. Proper care preserves natural oils, yarn
+          elasticity, and structural drape.
         </p>
       </div>
 
@@ -88,7 +95,8 @@ function CareGuidePage() {
           </p>
           <h2 className="font-display text-3xl">Submit a Garment Repair Claim</h2>
           <p className="text-xs text-muted-foreground">
-            Worn seam, missing button, or snag on your Nordhem piece? Submit below for free atelier repair.
+            Worn seam, missing button, or snag on your Nordhem piece? Submit below for free atelier
+            repair.
           </p>
         </div>
 
@@ -130,7 +138,10 @@ function CareGuidePage() {
               />
             </div>
 
-            <button type="submit" className="btn-solid py-3 px-8 text-xs uppercase tracking-widest flex items-center gap-2">
+            <button
+              type="submit"
+              className="btn-solid py-3 px-8 text-xs uppercase tracking-widest flex items-center gap-2"
+            >
               <Send size={14} /> Submit Repair Request
             </button>
           </form>
@@ -141,7 +152,8 @@ function CareGuidePage() {
             </div>
             <h3 className="font-display text-2xl">Claim Submitted</h3>
             <p className="text-xs text-muted-foreground max-w-md mx-auto">
-              Our Gothenburg atelier will email prepaid shipping label instructions to <strong className="text-foreground">{email}</strong> within 24 hours.
+              Our Gothenburg atelier will email prepaid shipping label instructions to{" "}
+              <strong className="text-foreground">{email}</strong> within 24 hours.
             </p>
           </div>
         )}

@@ -23,7 +23,8 @@ function WishlistPage() {
         <p className="eyebrow">Favorites</p>
         <h1 className="mt-4 font-display text-3xl md:text-4xl">Your wishlist is empty</h1>
         <p className="mt-4 text-sm text-muted-foreground">
-          Save pieces you love by clicking the heart icon on any product to revisit them here anytime.
+          Save pieces you love by clicking the heart icon on any product to revisit them here
+          anytime.
         </p>
         <Link to="/shop" className="btn-outline mt-8 inline-block">
           Explore collection

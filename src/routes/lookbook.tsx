@@ -45,7 +45,8 @@ function Lookbook() {
           </p>
           <h1 className="mt-2 font-display text-4xl md:text-5xl">Interactive Lookbook</h1>
           <p className="mt-3 max-w-md text-xs leading-relaxed text-muted-foreground">
-            Photographed on the Jutland coast and in Porto. Hover over any look or tap the pin to shop the featured piece.
+            Photographed on the Jutland coast and in Porto. Hover over any look or tap the pin to
+            shop the featured piece.
           </p>
         </div>
       </div>
@@ -91,10 +92,7 @@ function Lookbook() {
       </div>
 
       {activeProduct && (
-        <QuickViewModal
-          product={activeProduct}
-          onClose={() => setActiveProduct(null)}
-        />
+        <QuickViewModal product={activeProduct} onClose={() => setActiveProduct(null)} />
       )}
     </div>
   );

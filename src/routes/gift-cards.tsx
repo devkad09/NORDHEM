@@ -8,7 +8,10 @@ export const Route = createFileRoute("/gift-cards")({
   head: () => ({
     meta: [
       { title: "Digital Gift Cards — Nordhem" },
-      { name: "description", content: "Give the gift of timeless Scandinavian clothing with Nordhem digital vouchers." },
+      {
+        name: "description",
+        content: "Give the gift of timeless Scandinavian clothing with Nordhem digital vouchers.",
+      },
     ],
   }),
   component: GiftCardsPage,
@@ -41,7 +44,8 @@ function GiftCardsPage() {
         </p>
         <h1 className="font-display text-4xl md:text-5xl">Digital Gift Cards</h1>
         <p className="mx-auto max-w-md text-xs text-muted-foreground leading-relaxed">
-          Delivered instantly via email or custom digital link. Valid indefinitely across all Nordhem small-batch collections.
+          Delivered instantly via email or custom digital link. Valid indefinitely across all
+          Nordhem small-batch collections.
         </p>
       </div>
 
@@ -52,7 +56,9 @@ function GiftCardsPage() {
             <div className="flex justify-between items-start">
               <div>
                 <p className="font-display text-xl tracking-[0.3em]">NORDHEM</p>
-                <p className="eyebrow text-[0.6rem] text-muted-foreground mt-0.5">Digital Archive Voucher</p>
+                <p className="eyebrow text-[0.6rem] text-muted-foreground mt-0.5">
+                  Digital Archive Voucher
+                </p>
               </div>
               <Sparkles size={16} className="text-amber-700" />
             </div>
@@ -65,7 +71,9 @@ function GiftCardsPage() {
             </div>
 
             <div className="border-t border-border pt-4 text-xs space-y-1 text-muted-foreground">
-              <p>To: <strong className="text-foreground">{recipientName || "Recipient Name"}</strong></p>
+              <p>
+                To: <strong className="text-foreground">{recipientName || "Recipient Name"}</strong>
+              </p>
               {personalNote && <p className="italic text-[0.75rem]">“{personalNote}”</p>}
             </div>
           </div>
@@ -120,7 +128,9 @@ function GiftCardsPage() {
               </div>
 
               <div>
-                <label className="eyebrow text-[0.65rem] block mb-1">Personal Message (Optional)</label>
+                <label className="eyebrow text-[0.65rem] block mb-1">
+                  Personal Message (Optional)
+                </label>
                 <textarea
                   rows={3}
                   placeholder="Warmest wishes for a quiet, essential wardrobe..."
@@ -130,7 +140,10 @@ function GiftCardsPage() {
                 />
               </div>
 
-              <button type="submit" className="btn-solid w-full py-3.5 text-xs uppercase tracking-widest flex items-center justify-center gap-2">
+              <button
+                type="submit"
+                className="btn-solid w-full py-3.5 text-xs uppercase tracking-widest flex items-center justify-center gap-2"
+              >
                 <Send size={14} /> Issue Gift Voucher ({formatPrice(selectedEur)})
               </button>
             </form>

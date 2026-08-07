@@ -1,13 +1,25 @@
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { Package, Search, Truck, CheckCircle2, MapPin, Clock, ShieldCheck, ArrowRight } from "lucide-react";
+import {
+  Package,
+  Search,
+  Truck,
+  CheckCircle2,
+  MapPin,
+  Clock,
+  ShieldCheck,
+  ArrowRight,
+} from "lucide-react";
 import { useCurrency } from "@/lib/currency";
 
 export const Route = createFileRoute("/track-order")({
   head: () => ({
     meta: [
       { title: "Track Your Order — Nordhem" },
-      { name: "description", content: "Check the real-time tailoring and delivery status of your Nordhem order." },
+      {
+        name: "description",
+        content: "Check the real-time tailoring and delivery status of your Nordhem order.",
+      },
     ],
   }),
   component: TrackOrderPage,
@@ -40,7 +52,12 @@ const MOCK_ORDERS: Record<string, OrderStatus> = {
       { title: "Order Confirmed", date: "Aug 2, 2026 • 09:14 AM", completed: true },
       { title: "Atelier Quality Inspection", date: "Aug 2, 2026 • 02:40 PM", completed: true },
       { title: "Hand-Packed in Copenhagen", date: "Aug 3, 2026 • 10:05 AM", completed: true },
-      { title: "In Transit with DHL Express", date: "Aug 3, 2026 • 04:30 PM", completed: true, current: true },
+      {
+        title: "In Transit with DHL Express",
+        date: "Aug 3, 2026 • 04:30 PM",
+        completed: true,
+        current: true,
+      },
       { title: "Delivered to Door", date: "Est. Aug 6, 2026", completed: false },
     ],
   },
@@ -77,7 +94,12 @@ function TrackOrderPage() {
           { title: "Order Placed & Verified", date: "Recent", completed: true },
           { title: "Atelier Preparation", date: "Completed", completed: true },
           { title: "Hand-Packed in Copenhagen", date: "Completed", completed: true },
-          { title: "In Transit via Express Courier", date: "Current Step", completed: true, current: true },
+          {
+            title: "In Transit via Express Courier",
+            date: "Current Step",
+            completed: true,
+            current: true,
+          },
           { title: "Out for Final Delivery", date: "Pending", completed: false },
         ],
       };
@@ -95,14 +117,19 @@ function TrackOrderPage() {
         </p>
         <h1 className="font-display text-4xl md:text-5xl">Track Your Nordhem Order</h1>
         <p className="mx-auto max-w-md text-xs text-muted-foreground leading-relaxed">
-          Enter your order confirmation number (e.g. <strong className="text-foreground">NH-591024</strong>) or email address below to inspect your delivery timeline.
+          Enter your order confirmation number (e.g.{" "}
+          <strong className="text-foreground">NH-591024</strong>) or email address below to inspect
+          your delivery timeline.
         </p>
       </div>
 
       {/* Search Bar */}
       <form onSubmit={handleSearch} className="mx-auto flex max-w-lg gap-2">
         <div className="relative flex-1">
-          <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted-foreground" />
+          <Search
+            size={16}
+            className="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted-foreground"
+          />
           <input
             type="text"
             required
@@ -148,8 +175,12 @@ function TrackOrderPage() {
 
             <div className="text-left sm:text-right space-y-1 border-t sm:border-t-0 pt-3 sm:pt-0 border-border">
               <p className="eyebrow text-[0.65rem] text-muted-foreground">Estimated Delivery</p>
-              <p className="font-display text-lg font-medium text-foreground">{activeOrder.estimatedDelivery}</p>
-              <p className="text-[0.7rem] font-mono text-muted-foreground">Waybill #{activeOrder.trackingNumber}</p>
+              <p className="font-display text-lg font-medium text-foreground">
+                {activeOrder.estimatedDelivery}
+              </p>
+              <p className="text-[0.7rem] font-mono text-muted-foreground">
+                Waybill #{activeOrder.trackingNumber}
+              </p>
             </div>
           </div>
 
@@ -173,7 +204,9 @@ function TrackOrderPage() {
                   </div>
 
                   <div>
-                    <h3 className={`text-sm ${step.current ? "font-semibold text-foreground" : "font-medium"}`}>
+                    <h3
+                      className={`text-sm ${step.current ? "font-semibold text-foreground" : "font-medium"}`}
+                    >
                       {step.title}
                     </h3>
                     <p className="text-xs text-muted-foreground mt-0.5">{step.date}</p>
@@ -191,9 +224,13 @@ function TrackOrderPage() {
                 <div key={idx} className="py-2.5 flex justify-between items-center text-xs">
                   <div>
                     <span className="font-medium text-foreground">{item.name}</span>
-                    <span className="text-muted-foreground ml-2">Size {item.size} • Qty {item.qty}</span>
+                    <span className="text-muted-foreground ml-2">
+                      Size {item.size} • Qty {item.qty}
+                    </span>
                   </div>
-                  <span className="font-mono tabular-nums">{formatPrice(item.price * item.qty)}</span>
+                  <span className="font-mono tabular-nums">
+                    {formatPrice(item.price * item.qty)}
+                  </span>
                 </div>
               ))}
             </div>

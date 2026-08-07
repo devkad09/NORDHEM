@@ -31,9 +31,12 @@ export function VipBanner() {
           <p className="eyebrow flex items-center justify-center md:justify-start gap-1.5 text-amber-700 font-semibold">
             <Sparkles size={13} /> Nordhem Atelier Circle
           </p>
-          <h3 className="font-display text-xl md:text-2xl">Exclusive Small-Batch Access & Atelier Perks</h3>
+          <h3 className="font-display text-xl md:text-2xl">
+            Exclusive Small-Batch Access & Atelier Perks
+          </h3>
           <p className="text-xs text-muted-foreground max-w-lg">
-            Join 4,200+ members for 24-hour early drop access, complimentary express shipping, and annual repair credits.
+            Join 4,200+ members for 24-hour early drop access, complimentary express shipping, and
+            annual repair credits.
           </p>
         </div>
 
@@ -47,7 +50,10 @@ export function VipBanner() {
               onChange={(e) => setEmail(e.target.value)}
               className="w-full border border-border bg-background py-2.5 px-3 text-xs focus:border-foreground focus:outline-none"
             />
-            <button type="submit" className="btn-solid px-5 text-xs uppercase tracking-widest flex-shrink-0">
+            <button
+              type="submit"
+              className="btn-solid px-5 text-xs uppercase tracking-widest flex-shrink-0"
+            >
               Join Circle
             </button>
           </form>
