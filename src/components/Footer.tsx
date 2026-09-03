@@ -67,11 +67,6 @@ export function Footer() {
                 Track Order
               </Link>
             </li>
-            <li>
-              <Link to="/admin" className="link-underline text-clay font-medium">
-                Admin Studio (Upload & DB)
-              </Link>
-            </li>
           </ul>
           <div className="mt-6 flex gap-4 text-muted-foreground">
             <a href="#" aria-label="Instagram" className="transition-colors hover:text-foreground">
@@ -98,10 +93,6 @@ export function Footer() {
         <div className="mx-auto flex max-w-[110rem] flex-col gap-2 px-5 py-6 text-xs text-muted-foreground md:flex-row md:justify-between md:px-10">
           <p>© {new Date().getFullYear()} Nordhem. All rights reserved.</p>
           <div className="flex items-center gap-4">
-            <Link to="/admin" className="text-muted-foreground hover:text-clay transition-colors">
-              Studio CMS
-            </Link>
-            <span>·</span>
             <p>Scandinavian Atelier System</p>
           </div>
         </div>

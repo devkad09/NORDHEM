@@ -7,7 +7,6 @@ import {
   X,
   Globe,
   Award,
-  Lock,
   Sun,
   Moon,
   Sparkles,
@@ -80,7 +79,7 @@ export function Nav() {
           </Link>
         </div>
 
-        {/* Right Navigation: Perks, Currency, Admin & Cart */}
+        {/* Right Navigation: Perks, Currency & Cart */}
         <div className="flex flex-1 items-center justify-end gap-2.5 sm:gap-4 md:gap-5">
           {/* Style Quiz for medium screens */}
           <Link
@@ -98,16 +97,6 @@ export function Nav() {
           >
             <Award size={12} className="text-clay" />
             <span className="font-mono text-[11px] text-foreground font-medium">{points} PTS</span>
-          </Link>
-
-          {/* Admin Studio Access Button */}
-          <Link
-            to="/admin"
-            className="hidden md:flex items-center gap-1 px-2 py-0.5 rounded-xs border border-border/70 text-[10px] uppercase tracking-widest text-muted-foreground hover:text-foreground hover:border-clay transition-colors"
-            title="Atelier Admin CMS"
-          >
-            <Lock size={10} className="text-clay" />
-            <span>Admin</span>
           </Link>
 
           {/* Currency Switcher */}
@@ -237,14 +226,6 @@ export function Nav() {
                 >
                   <span>VIP Rewards Club</span>
                   <span className="font-mono text-xs text-clay">{points} PTS</span>
-                </Link>
-                <Link
-                  to="/admin"
-                  onClick={() => setOpen(false)}
-                  className="text-sm font-light text-clay hover:underline transition-colors flex items-center gap-1.5"
-                >
-                  <Lock size={12} />
-                  <span>Admin Upload Studio</span>
                 </Link>
               </div>
             </div>
