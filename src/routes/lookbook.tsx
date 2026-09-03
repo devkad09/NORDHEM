@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { lookbook, products, type Product } from "@/data/products";
+import { type Product } from "@/data/products";
+import { useProductsStore, useLookbookStore } from "@/lib/products-store";
 import { QuickViewModal } from "@/components/QuickViewModal";
 import { ShoppingBag, Sparkles } from "lucide-react";
 
@@ -34,6 +35,8 @@ const LOOKBOOK_FEATURED_PRODUCTS: Record<number, string> = {
 };
 
 function Lookbook() {
+  const { products } = useProductsStore();
+  const { lookbook } = useLookbookStore();
   const [activeProduct, setActiveProduct] = useState<Product | null>(null);
 
   return (

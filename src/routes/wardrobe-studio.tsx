@@ -11,7 +11,8 @@ import {
   Layers,
   Award,
 } from "lucide-react";
-import { products, type Product } from "@/data/products";
+import { type Product } from "@/data/products";
+import { useProductsStore } from "@/lib/products-store";
 import { useCart } from "@/lib/cart";
 import { useCurrency } from "@/lib/currency";
 import { useRewards } from "@/lib/rewards";
@@ -47,12 +48,13 @@ const CATEGORY_SLOTS: { key: keyof OutfitSlots; label: string; catName: string }
 ];
 
 function WardrobeStudio() {
+  const { products } = useProductsStore();
   const [activeCategory, setActiveCategory] = useState<keyof OutfitSlots>("outerwear");
   const [slots, setSlots] = useState<OutfitSlots>({
-    outerwear: products.find((p) => p.id === "wool-coat") || products[0],
-    top: products.find((p) => p.id === "cashmere-crewneck") || products[5],
-    bottom: products.find((p) => p.id === "wide-trouser") || products[10],
-    accessory: products.find((p) => p.id === "wool-scarf") || null,
+    outerwear: products[0] || null,
+    top: products[5] || products[1] || null,
+    bottom: products[10] || products[2] || null,
+    accessory: products.find((p) => p.id.includes("scarf")) || null,
   });
 
   const { add } = useCart();

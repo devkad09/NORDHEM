@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ChevronDown, ArrowRight, Layers, Sparkles, Award, Leaf } from "lucide-react";
 import heroImage from "@/assets/hero.jpg";
-import { products, lookbook } from "@/data/products";
+import { useProductsStore, useLookbookStore } from "@/lib/products-store";
 import { ProductCard } from "@/components/ProductCard";
 import { Newsletter } from "@/components/Newsletter";
 import { VipBanner } from "@/components/VipBanner";
@@ -26,6 +26,8 @@ export const Route = createFileRoute("/")({
 });
 
 function Home() {
+  const { products } = useProductsStore();
+  const { lookbook } = useLookbookStore();
   const featured = products.filter((p) => p.featured).slice(0, 6);
 
   return (

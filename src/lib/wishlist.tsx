@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
-import { products, type Product } from "@/data/products";
+import { type Product, getProduct } from "@/data/products";
+import { useProductsStore } from "@/lib/products-store";
 
 type WishlistContextValue = {
   wishlistIds: string[];
@@ -15,6 +16,7 @@ const WishlistContext = createContext<WishlistContextValue | null>(null);
 const STORAGE_KEY = "nordhem.wishlist";
 
 export function WishlistProvider({ children }: { children: ReactNode }) {
+  const { products } = useProductsStore();
   const [wishlistIds, setWishlistIds] = useState<string[]>([]);
   const [hydrated, setHydrated] = useState(false);
 
@@ -35,7 +37,7 @@ export function WishlistProvider({ children }: { children: ReactNode }) {
 
   const value = useMemo<WishlistContextValue>(() => {
     const wishlistProducts = wishlistIds
-      .map((id) => products.find((p) => p.id === id))
+      .map((id) => products.find((p) => p.id === id) || getProduct(id))
       .filter((p): p is Product => p !== undefined);
 
     return {
@@ -50,7 +52,7 @@ export function WishlistProvider({ children }: { children: ReactNode }) {
       remove: (id: string) => setWishlistIds((prev) => prev.filter((item) => item !== id)),
       clear: () => setWishlistIds([]),
     };
-  }, [wishlistIds]);
+  }, [wishlistIds, products]);
 
   return <WishlistContext.Provider value={value}>{children}</WishlistContext.Provider>;
 }

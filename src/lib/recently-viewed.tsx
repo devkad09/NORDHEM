@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
-import { products, type Product } from "@/data/products";
+import { type Product, getProduct } from "@/data/products";
+import { useProductsStore } from "@/lib/products-store";
 
 type RecentlyViewedContextValue = {
   viewedIds: string[];
@@ -12,6 +13,7 @@ const RecentlyViewedContext = createContext<RecentlyViewedContextValue | null>(n
 const STORAGE_KEY = "nordhem.recentlyViewed";
 
 export function RecentlyViewedProvider({ children }: { children: ReactNode }) {
+  const { products } = useProductsStore();
   const [viewedIds, setViewedIds] = useState<string[]>([]);
   const [hydrated, setHydrated] = useState(false);
 
@@ -32,7 +34,7 @@ export function RecentlyViewedProvider({ children }: { children: ReactNode }) {
 
   const value = useMemo<RecentlyViewedContextValue>(() => {
     const viewedProducts = viewedIds
-      .map((id) => products.find((p) => p.id === id))
+      .map((id) => products.find((p) => p.id === id) || getProduct(id))
       .filter((p): p is Product => p !== undefined);
 
     return {
@@ -45,7 +47,7 @@ export function RecentlyViewedProvider({ children }: { children: ReactNode }) {
         }),
       clearViewed: () => setViewedIds([]),
     };
-  }, [viewedIds]);
+  }, [viewedIds, products]);
 
   return <RecentlyViewedContext.Provider value={value}>{children}</RecentlyViewedContext.Provider>;
 }

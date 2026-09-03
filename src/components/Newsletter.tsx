@@ -1,9 +1,13 @@
 import { useState, type FormEvent } from "react";
+import { addSubscriber } from "@/lib/subscribers";
+import { useRewards } from "@/lib/rewards";
+import { toast } from "sonner";
 
 export function Newsletter({ compact = false }: { compact?: boolean }) {
   const [email, setEmail] = useState("");
   const [done, setDone] = useState(false);
   const [error, setError] = useState("");
+  const { earnPoints } = useRewards();
 
   function onSubmit(e: FormEvent) {
     e.preventDefault();
@@ -12,6 +16,9 @@ export function Newsletter({ compact = false }: { compact?: boolean }) {
       return;
     }
     setError("");
+    addSubscriber(email, "FOOTER_FORM");
+    earnPoints(100, "VIP Newsletter Welcome Bonus");
+    toast.success("Subscribed! +100 VIP Points Added to your account");
     setDone(true);
   }
 

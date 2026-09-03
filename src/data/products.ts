@@ -77,9 +77,21 @@ export const products: Product[] = (raw as Omit<Product, "imageUrl" | "hoverImag
   }),
 );
 
-export const categories = Array.from(new Set(products.map((p) => p.category)));
-
-export const getProduct = (id: string) => products.find((p) => p.id === id);
+export const getProduct = (id: string): Product | undefined => {
+  if (typeof window !== "undefined") {
+    try {
+      const stored = localStorage.getItem("nordhem_products_v2");
+      if (stored) {
+        const list = JSON.parse(stored) as Product[];
+        const found = list.find((p) => p.id === id);
+        if (found) return found;
+      }
+    } catch {
+      /* ignore storage parse failure */
+    }
+  }
+  return products.find((p) => p.id === id);
+};
 
 // Conversion rate from EUR base price to Ghanaian Cedis (GHS)
 export const EUR_TO_GHS_RATE = 17.5;

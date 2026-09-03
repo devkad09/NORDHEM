@@ -9,7 +9,8 @@ import {
   ArrowLeft,
   Award,
 } from "lucide-react";
-import { products, type Product } from "@/data/products";
+import { type Product } from "@/data/products";
+import { useProductsStore } from "@/lib/products-store";
 import { useCart } from "@/lib/cart";
 import { useCurrency } from "@/lib/currency";
 import { useRewards } from "@/lib/rewards";
@@ -115,6 +116,7 @@ const QUESTIONS = [
 ];
 
 function StyleQuiz() {
+  const { products } = useProductsStore();
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<QuizState>({
     aesthetic: "",

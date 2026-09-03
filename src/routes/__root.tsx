@@ -11,6 +11,8 @@ import {
 import { type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
+import { ThemeProvider } from "@/lib/theme";
+import { ProductsStoreProvider } from "@/lib/products-store";
 import { CartProvider } from "@/lib/cart";
 import { WishlistProvider } from "@/lib/wishlist";
 import { CurrencyProvider } from "@/lib/currency";
@@ -28,17 +30,14 @@ function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
-        <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
+        <h1 className="text-7xl font-bold text-foreground font-display">404</h1>
+        <h2 className="mt-4 text-xl font-light text-foreground">Page not found</h2>
         <p className="mt-2 text-sm text-muted-foreground">
           The page you're looking for doesn't exist or has been moved.
         </p>
         <div className="mt-6">
-          <Link
-            to="/"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-          >
-            Go home
+          <Link to="/" className="btn-solid py-2.5 px-6 text-xs">
+            Return to Scandinavian Storefront
           </Link>
         </div>
       </div>
@@ -53,7 +52,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
-        <h1 className="text-xl font-semibold tracking-tight text-foreground">
+        <h1 className="text-xl font-light tracking-tight text-foreground font-display">
           This page didn't load
         </h1>
         <p className="mt-2 text-sm text-muted-foreground">
@@ -65,14 +64,11 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
               router.invalidate();
               reset();
             }}
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            className="btn-solid py-2 px-4 text-xs cursor-pointer"
           >
             Try again
           </button>
-          <a
-            href="/"
-            className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
-          >
+          <a href="/" className="btn-outline py-2 px-4 text-xs cursor-pointer">
             Go home
           </a>
         </div>
@@ -115,6 +111,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 });
 
 function RootShell({ children }: { children: ReactNode }) {
+  if (typeof document !== "undefined") {
+    return <>{children}</>;
+  }
   return (
     <html lang="en">
       <head>
@@ -134,36 +133,39 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <CurrencyProvider>
-        <WishlistProvider>
-          <RecentlyViewedProvider>
-            <CompareProvider>
-              <RewardsProvider>
-                <CartProvider>
-                  <div className="flex min-h-screen flex-col">
-                    <Nav />
-                    <main className="flex-1">
-                      <div key={location.pathname} className="page-transition">
-                        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-                        <Outlet />
+      <ThemeProvider>
+        <ProductsStoreProvider>
+          <CurrencyProvider>
+            <WishlistProvider>
+              <RecentlyViewedProvider>
+                <CompareProvider>
+                  <RewardsProvider>
+                    <CartProvider>
+                      <div className="flex min-h-screen flex-col bg-background text-foreground transition-colors duration-300">
+                        <Nav />
+                        <main className="flex-1">
+                          <div key={location.pathname} className="page-transition">
+                            <Outlet />
+                          </div>
+                        </main>
+                        <Footer />
                       </div>
-                    </main>
-                    <Footer />
-                  </div>
-                  <MiniCartDrawer />
-                  <CompareDrawer />
-                  <Toaster
-                    position="bottom-right"
-                    toastOptions={{
-                      className: "font-sans text-xs bg-card text-foreground border-border",
-                    }}
-                  />
-                </CartProvider>
-              </RewardsProvider>
-            </CompareProvider>
-          </RecentlyViewedProvider>
-        </WishlistProvider>
-      </CurrencyProvider>
+                      <MiniCartDrawer />
+                      <CompareDrawer />
+                      <Toaster
+                        position="bottom-right"
+                        toastOptions={{
+                          className: "font-sans text-xs bg-card text-foreground border-border",
+                        }}
+                      />
+                    </CartProvider>
+                  </RewardsProvider>
+                </CompareProvider>
+              </RecentlyViewedProvider>
+            </WishlistProvider>
+          </CurrencyProvider>
+        </ProductsStoreProvider>
+      </ThemeProvider>
     </QueryClientProvider>
   );
 }

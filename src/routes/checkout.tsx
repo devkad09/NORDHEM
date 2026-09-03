@@ -51,15 +51,29 @@ const PROMO_CODES: Record<string, { label: string; percent?: number; freeShippin
   FREESHIP: { label: "Free Express Shipping", freeShipping: true },
 };
 
+import { validatePromoCode, incrementPromoUsage, type PromoCode } from "@/lib/discounts";
+
 function CheckoutPage() {
   const { detailed, subtotal, clear } = useCart();
   const { formatPrice } = useCurrency();
   const search = Route.useSearch();
 
-  const initialPromo = search.promo ? search.promo.toUpperCase() : null;
-  const [promoCode, setPromoCode] = useState<string | null>(
-    initialPromo && PROMO_CODES[initialPromo] ? initialPromo : null,
-  );
+  const [promoInput, setPromoInput] = useState(search.promo || "");
+  const [appliedPromo, setAppliedPromo] = useState<PromoCode | null>(() => {
+    if (search.promo) {
+      const res = validatePromoCode(search.promo, subtotal);
+      return res.valid && res.promo ? res.promo : null;
+    }
+    return null;
+  });
+  const [promoError, setPromoError] = useState<string | null>(null);
+  const [promoSuccess, setPromoSuccess] = useState<string | null>(() => {
+    if (search.promo) {
+      const res = validatePromoCode(search.promo, subtotal);
+      return res.valid ? res.message : null;
+    }
+    return null;
+  });
 
   // Form State
   const [email, setEmail] = useState("");
@@ -75,11 +89,38 @@ function CheckoutPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [orderConfirmed, setOrderConfirmed] = useState<OrderDetails | null>(null);
 
-  const promoInfo = promoCode ? PROMO_CODES[promoCode] : null;
-  const discountAmount = promoInfo?.percent ? subtotal * (promoInfo.percent / 100) : 0;
+  // Calculate Discounts
+  const promoValidation = appliedPromo
+    ? validatePromoCode(appliedPromo.code, subtotal)
+    : { discountAmount: 0, valid: false };
+
+  const discountAmount = promoValidation.discountAmount;
+  const isFreeShipping = appliedPromo?.discountType === "FREE_SHIPPING";
   const rawShippingCost = shippingMethod === "express" ? 25 : 0;
-  const shippingCost = promoInfo?.freeShipping ? 0 : rawShippingCost;
+  const shippingCost = isFreeShipping ? 0 : rawShippingCost;
   const total = Math.max(0, subtotal - discountAmount + shippingCost);
+
+  const handleApplyPromo = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!promoInput.trim()) return;
+
+    const res = validatePromoCode(promoInput, subtotal);
+    if (res.valid && res.promo) {
+      setAppliedPromo(res.promo);
+      setPromoSuccess(res.message);
+      setPromoError(null);
+    } else {
+      setPromoError(res.message);
+      setPromoSuccess(null);
+    }
+  };
+
+  const handleRemovePromo = () => {
+    setAppliedPromo(null);
+    setPromoInput("");
+    setPromoSuccess(null);
+    setPromoError(null);
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -499,11 +540,66 @@ function CheckoutPage() {
               ))}
             </div>
 
+            {/* Promo Code Input */}
+            <div className="mt-4 border-t border-border pt-4">
+              {appliedPromo ? (
+                <div className="flex items-center justify-between rounded bg-secondary/50 p-2.5 text-xs">
+                  <div className="flex items-center gap-2">
+                    <Tag className="h-4 w-4 text-clay" />
+                    <div>
+                      <span className="font-mono font-semibold text-foreground">
+                        {appliedPromo.code}
+                      </span>
+                      <p className="text-[11px] text-muted-foreground">{promoSuccess}</p>
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={handleRemovePromo}
+                    className="text-xs text-muted-foreground hover:text-destructive underline cursor-pointer"
+                  >
+                    Remove
+                  </button>
+                </div>
+              ) : (
+                <div className="space-y-1.5">
+                  <div className="flex gap-2">
+                    <input
+                      type="text"
+                      value={promoInput}
+                      onChange={(e) => setPromoInput(e.target.value.toUpperCase())}
+                      placeholder="Promo / Voucher Code"
+                      className="flex-1 border border-border bg-background px-3 py-2 text-xs font-mono uppercase focus:border-foreground focus:outline-none"
+                    />
+                    <button
+                      type="button"
+                      onClick={handleApplyPromo}
+                      className="btn-outline px-4 py-2 text-xs cursor-pointer"
+                    >
+                      Apply
+                    </button>
+                  </div>
+                  {promoError && <p className="text-[11px] text-destructive">{promoError}</p>}
+                  <p className="text-[10px] text-muted-foreground">
+                    Try: <code className="text-foreground">NORDIC15</code>,{" "}
+                    <code className="text-foreground">COPENHAGEN25</code>, or{" "}
+                    <code className="text-foreground">FREESHIP</code>
+                  </p>
+                </div>
+              )}
+            </div>
+
             <div className="mt-6 border-t border-border pt-4 space-y-3 text-sm">
               <div className="flex justify-between">
                 <span className="text-muted-foreground">Subtotal</span>
                 <span className="tabular-nums">{formatPrice(subtotal)}</span>
               </div>
+              {discountAmount > 0 && (
+                <div className="flex justify-between text-emerald-600 dark:text-emerald-400">
+                  <span>Discount ({appliedPromo?.code})</span>
+                  <span className="tabular-nums">-{formatPrice(discountAmount)}</span>
+                </div>
+              )}
               <div className="flex justify-between">
                 <span className="text-muted-foreground">Shipping</span>
                 <span>{shippingCost === 0 ? "Complimentary" : formatPrice(shippingCost)}</span>

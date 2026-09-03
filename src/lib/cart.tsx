@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
-import { products, type Product } from "@/data/products";
+import { type Product, getProduct } from "@/data/products";
+import { useProductsStore } from "@/lib/products-store";
 
 export type CartLine = { id: string; size: string; qty: number };
 
@@ -22,6 +23,7 @@ const CartContext = createContext<CartContextValue | null>(null);
 const STORAGE_KEY = "nordhem.cart";
 
 export function CartProvider({ children }: { children: ReactNode }) {
+  const { products } = useProductsStore();
   const [lines, setLines] = useState<CartLine[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const [hydrated, setHydrated] = useState(false);
@@ -44,7 +46,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const value = useMemo<CartContextValue>(() => {
     const detailed = lines
       .map((line) => {
-        const product = products.find((p) => p.id === line.id);
+        const product = products.find((p) => p.id === line.id) || getProduct(line.id);
         return product ? { ...line, product } : null;
       })
       .filter((l): l is CartLine & { product: Product } => l !== null);
@@ -80,7 +82,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         ),
       clear: () => setLines([]),
     };
-  }, [lines, isOpen]);
+  }, [lines, isOpen, products]);
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }

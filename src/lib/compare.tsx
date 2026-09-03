@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
-import { products, type Product } from "@/data/products";
+import { type Product, getProduct } from "@/data/products";
+import { useProductsStore } from "@/lib/products-store";
 
 type CompareContextValue = {
   compareIds: string[];
@@ -16,6 +17,7 @@ const CompareContext = createContext<CompareContextValue | null>(null);
 const STORAGE_KEY = "nordhem.compare";
 
 export function CompareProvider({ children }: { children: ReactNode }) {
+  const { products } = useProductsStore();
   const [compareIds, setCompareIds] = useState<string[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const [hydrated, setHydrated] = useState(false);
@@ -37,7 +39,7 @@ export function CompareProvider({ children }: { children: ReactNode }) {
 
   const value = useMemo<CompareContextValue>(() => {
     const compareProducts = compareIds
-      .map((id) => products.find((p) => p.id === id))
+      .map((id) => products.find((p) => p.id === id) || getProduct(id))
       .filter((p): p is Product => p !== undefined);
 
     return {
@@ -59,7 +61,7 @@ export function CompareProvider({ children }: { children: ReactNode }) {
       removeCompare: (id: string) => setCompareIds((prev) => prev.filter((item) => item !== id)),
       clearCompare: () => setCompareIds([]),
     };
-  }, [compareIds, isOpen]);
+  }, [compareIds, isOpen, products]);
 
   return <CompareContext.Provider value={value}>{children}</CompareContext.Provider>;
 }

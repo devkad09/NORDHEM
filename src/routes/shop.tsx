@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { Search, X } from "lucide-react";
-import { categories, products } from "@/data/products";
+import { useProductsStore } from "@/lib/products-store";
 import { ProductCard } from "@/components/ProductCard";
 
 export const Route = createFileRoute("/shop")({
@@ -26,6 +26,7 @@ export const Route = createFileRoute("/shop")({
 type Sort = "featured" | "price-asc" | "price-desc" | "name-asc";
 
 function Shop() {
+  const { products, categories } = useProductsStore();
   const [category, setCategory] = useState<string>("All");
   const [sort, setSort] = useState<Sort>("featured");
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -48,7 +49,7 @@ function Shop() {
     if (sort === "price-desc") return [...list].sort((a, b) => b.price - a.price);
     if (sort === "name-asc") return [...list].sort((a, b) => a.name.localeCompare(b.name));
     return list;
-  }, [category, sort, searchQuery, inStockOnly]);
+  }, [products, category, sort, searchQuery, inStockOnly]);
 
   return (
     <div className="mx-auto max-w-[110rem] px-5 py-14 md:px-10 md:py-20">
